@@ -1,0 +1,146 @@
+"use client";
+import React, { useEffect, useState } from "react";
+
+const Preloader = () => {
+  const [visible, setVisible] = useState(true);
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    // Extended the timer slightly to let the beautiful new animations play out
+    const timer = setTimeout(() => setFadeOut(true), 2500);
+    const hide = setTimeout(() => setVisible(false), 3000);
+    return () => { clearTimeout(timer); clearTimeout(hide); };
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 9999,
+        background: "#050505",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "1rem",
+        transition: "opacity 0.5s ease",
+        opacity: fadeOut ? 0 : 1,
+        pointerEvents: fadeOut ? "none" : "auto",
+      }}
+    >
+      {/* Animated Circular Container & Wave Logo */}
+      <div className="logo-circle">
+        <img src="/logo.png" alt="Luma Softs" className="wave-logo" />
+      </div>
+
+      {/* Brand Name */}
+      <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
+        <p style={{ fontWeight: 700, fontSize: "1.25rem", letterSpacing: "0.2em", color: "var(--fg)", marginBottom: "0.5rem" }}>
+          LUMA <span style={{ color: "var(--primary)" }}>SOFTS</span>
+        </p>
+        <p style={{ fontSize: "0.8125rem", color: "var(--gray)", letterSpacing: "0.05em" }}>
+          INITIALIZING SYSTEM...
+        </p>
+      </div>
+
+      {/* Continuous SVG Wave Line */}
+      <div style={{ width: 120, height: 20, overflow: "hidden", position: "relative", marginTop: "0.5rem" }}>
+        <svg width="240" height="20" className="wave-line">
+          {/* M 0 10 starts at left middle. 
+              Q 15 0 30 10 is an upward curve. 
+              T 60 10 is a downward curve to complete one cycle. 
+              Repeats to make a continuous seamless loop. */}
+          <path 
+            d="M 0 10 Q 15 0 30 10 T 60 10 T 90 10 T 120 10 T 150 10 T 180 10 T 210 10 T 240 10" 
+            fill="none" 
+            stroke="var(--primary)" 
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      <style>{`
+        /* The container circle appears smoothly with a glow */
+        .logo-circle {
+          width: 140px;
+          height: 140px;
+          border-radius: 50%;
+          border: 2px dashed var(--primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(194,255,5,0.03);
+          box-shadow: 0 0 30px rgba(194,255,5,0.15), inset 0 0 20px rgba(194,255,5,0.1);
+          animation: circleSpinAppear 1.5s ease-out forwards, circleRotate 10s linear infinite;
+        }
+
+        /* The logo comes from behind in a curved 'wave' trajectory and settles in the circle */
+        .wave-logo {
+          width: 80px;
+          height: 80px;
+          object-fit: contain;
+          /* Use a bouncy cubic-bezier to make it feel like a splashing wave */
+          animation: logoWaveEntrance 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* Seamless looping wave animation for the bottom line */
+        .wave-line {
+          position: absolute;
+          left: 0;
+          top: 0;
+          animation: slideWave 1.2s linear infinite;
+        }
+
+        @keyframes circleSpinAppear {
+          0% { transform: scale(0); opacity: 0; border-color: transparent; }
+          50% { transform: scale(1.1); opacity: 0.5; border-color: rgba(194,255,5,0.5); }
+          100% { transform: scale(1); opacity: 1; border-color: var(--primary); }
+        }
+
+        @keyframes circleRotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        /* Reverses the container's rotation so the logo stays upright */
+        .wave-logo {
+          animation: logoWaveEntrance 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, counterRotate 10s linear infinite;
+        }
+
+        @keyframes counterRotate {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(-360deg); }
+        }
+
+        @keyframes logoWaveEntrance {
+          0% {
+            transform: scale(0) translate(-150px, 150px);
+            opacity: 0;
+          }
+          40% {
+            transform: scale(1.3) translate(30px, -40px);
+            opacity: 1;
+          }
+          70% {
+            transform: scale(0.9) translate(-10px, 10px);
+          }
+          100% {
+            transform: scale(1) translate(0, 0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes slideWave {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-120px); } /* Shifts exactly 2 full waves */
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default Preloader;
