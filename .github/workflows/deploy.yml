@@ -19,10 +19,10 @@ jobs:
         node-version: '20.x'
 
     - name: 🔐 Create env file
+      env:
+        ENV_FILE: ${{ secrets.ENV_FILE }}
       run: |
-        cat << 'EOF' > .env.local
-        ${{ secrets.ENV_FILE }}
-        EOF
+        echo "$ENV_FILE" > .env.local
 
     - name: 📦 Install dependencies
       run: npm install

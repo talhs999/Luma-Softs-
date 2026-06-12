@@ -1,9 +1,13 @@
 const { createServer } = require("http");
 const { parse } = require("url");
 const next = require("next");
+const { loadEnvConfig } = require('@next/env');
+
+const projectDir = process.cwd();
+loadEnvConfig(projectDir);
 
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const app = next({ dev, hostname: 'localhost', port: 3000 });
 const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
