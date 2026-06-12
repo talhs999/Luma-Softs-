@@ -77,9 +77,7 @@ export default function TeamSection() {
             ))}
           </div>
         )}
-        <p style={{ textAlign: "center", color: "var(--gray)", fontSize: "0.875rem", marginTop: "1.5rem" }}>
-          Team members are managed dynamically via the Admin Panel.
-        </p>
+
       </div>
 
       {selectedMember && (
