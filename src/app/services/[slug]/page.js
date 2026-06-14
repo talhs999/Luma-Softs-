@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "../../../lib/supabase";
+
 import { Globe, ShoppingCart, Cpu, Smartphone, Target, PenTool, BarChart3, Bot, Check, FileText, Settings, Brush, LineChart, Plug, Video, Cloud, Shield, Search, Monitor } from "lucide-react";
 
 const ICON_MAP = {
@@ -34,11 +34,17 @@ export default function ServiceDetailPage() {
 
   useEffect(() => {
     const fetchService = async () => {
-      const { data, error } = await supabase.from("services").select("*").eq("slug", slug).single();
-      if (!error && data) {
-        setService(data);
+      try {
+        const res = await fetch(`/api/services/${slug}`);
+        if (res.ok) {
+          const data = await res.json();
+          setService(data);
+        }
+      } catch (err) {
+        console.error("Error fetching service:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     if (slug) fetchService();
   }, [slug]);

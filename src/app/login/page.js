@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { supabase } from "../../lib/supabase";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -15,20 +15,25 @@ export default function LoginPage() {
     setLoading(true);
     setError(null);
 
-    if (!supabase) {
-      setError("Supabase is not configured. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to your .env.local file.");
-      setLoading(false);
-      return;
-    }
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const { error, data } = await supabase.auth.signInWithPassword({ email, password });
-
-    if (error) {
-      setError(error.message);
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.error || 'Authentication failed');
+        setLoading(false);
+      } else {
+        router.push("/admin");
+      }
+    } catch (err) {
+      setError('An error occurred. Please try again.');
       setLoading(false);
-    } else {
-      document.cookie = `sb-access-token=${data.session.access_token}; path=/; max-age=86400`;
-      router.push("/admin");
     }
   };
 

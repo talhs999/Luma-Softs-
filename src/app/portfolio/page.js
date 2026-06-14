@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { supabase } from "../../lib/supabase";
+
 import { Globe, ShoppingCart, Bot, Smartphone, PenTool, BarChart3, Cpu, Layers } from "lucide-react";
 
 const ICON_MAP = {
@@ -38,11 +38,17 @@ export default function PortfolioPage() {
 
   const fetchPortfolio = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("portfolio").select("*").order("created_at", { ascending: false });
-    if (!error && data) {
-      setPortfolio(data);
+    try {
+      const res = await fetch("/api/portfolio");
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        setPortfolio(data);
+      }
+    } catch (err) {
+      console.error("Error fetching portfolio:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const filtered = activeCategory === "All" ? portfolio : portfolio.filter((p) => p.category === activeCategory);

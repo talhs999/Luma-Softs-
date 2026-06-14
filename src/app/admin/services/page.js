@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { supabase } from "../../../lib/supabase";
+
 import { Monitor, ShoppingCart, FileText, Settings, Smartphone, Target, Brush, LineChart, Bot, Plug, Video, Cloud, Shield, Search } from "lucide-react";
 
 const ICON_MAP = {
@@ -27,11 +27,17 @@ export default function AdminServicesPage() {
 
   const fetchServices = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("services").select("*").order("created_at", { ascending: true });
-    if (!error && data) {
-      setServices(data);
+    try {
+      const res = await fetch("/api/admin/services");
+      if (res.ok) {
+        const data = await res.json();
+        setServices(data || []);
+      }
+    } catch (err) {
+      console.error("Error fetching services:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleOpenModal = (service = null) => {
@@ -54,15 +60,19 @@ export default function AdminServicesPage() {
       setUploadingImage(true);
       const file = e.target.files[0];
       if (!file) return;
-      const fileExt = file.name.split('.').pop();
-      const fileName = `${Math.random()}.${fileExt}`;
-      const filePath = `${fileName}`;
 
-      const { error: uploadError } = await supabase.storage.from('service_images').upload(filePath, file);
-      if (uploadError) throw uploadError;
+      const formDataUpload = new FormData();
+      formDataUpload.append("file", file);
 
-      const { data } = supabase.storage.from('service_images').getPublicUrl(filePath);
-      setFormData({ ...formData, image: data.publicUrl });
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formDataUpload
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Upload failed");
+
+      setFormData(prev => ({ ...prev, image: data.url }));
     } catch (error) {
       alert("Error uploading image: " + error.message);
     } finally {
@@ -84,13 +94,18 @@ export default function AdminServicesPage() {
         benefits: formData.benefitsText.split("\n").filter(b => b.trim() !== ""),
       };
 
-      if (editingId) {
-        const { error } = await supabase.from("services").update(payload).eq("id", editingId);
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.from("services").insert([payload]);
-        if (error) throw error;
-      }
+      const method = editingId ? "PUT" : "POST";
+      const body = editingId ? { ...payload, id: editingId } : payload;
+
+      const res = await fetch("/api/admin/services", {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to save service");
+
       setModalOpen(false);
       fetchServices();
     } catch (error) {
@@ -101,8 +116,12 @@ export default function AdminServicesPage() {
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this service?")) return;
     try {
-      const { error } = await supabase.from("services").delete().eq("id", id);
-      if (error) throw error;
+      const res = await fetch(`/api/admin/services?id=${id}`, {
+        method: "DELETE"
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to delete service");
+
       fetchServices();
     } catch (error) {
       alert("Error deleting service: " + error.message);

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { supabase } from "../../../lib/supabase";
+
 import { Trash2, Mail, Clock, RefreshCw } from "lucide-react";
 
 export default function AdminMessagesPage() {
@@ -13,26 +13,31 @@ export default function AdminMessagesPage() {
 
   const fetchMessages = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from("messages")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (error) {
+    try {
+      const res = await fetch("/api/admin/messages");
+      if (res.ok) {
+        const data = await res.json();
+        setMessages(data || []);
+      }
+    } catch (error) {
       console.error("Error fetching messages:", error);
-    } else {
-      setMessages(data || []);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this message?")) {
-      const { error } = await supabase.from("messages").delete().eq("id", id);
-      if (error) {
-        alert("Error deleting message: " + error.message);
-      } else {
+      try {
+        const res = await fetch(`/api/admin/messages?id=${id}`, {
+          method: "DELETE"
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to delete message");
+        
         fetchMessages();
+      } catch (error) {
+        alert("Error deleting message: " + error.message);
       }
     }
   };

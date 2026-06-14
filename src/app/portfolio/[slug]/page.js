@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { supabase } from "../../../lib/supabase";
+
 import { Globe, ShoppingCart, Bot, Smartphone, PenTool, BarChart3, Cpu, Layers, Code } from "lucide-react";
 import {
   SiNextdotjs, SiTailwindcss, SiSupabase, SiReact, SiVuedotjs, SiAngular, SiNodedotjs, SiPython, SiDjango, SiLaravel, SiPhp, SiFirebase, SiMongodb, SiPostgresql, SiMysql, SiDocker, SiFigma, SiWordpress, SiShopify
@@ -65,20 +65,18 @@ export default function PortfolioDetailPage() {
 
   const fetchData = async () => {
     setLoading(true);
-    const { data: projData, error } = await supabase.from("portfolio").select("*").eq("slug", slug).single();
-    
-    if (!error && projData) {
-      setProject(projData);
-      // Fetch related projects in the same category
-      const { data: relData } = await supabase
-        .from("portfolio")
-        .select("*")
-        .eq("category", projData.category)
-        .neq("slug", slug)
-        .limit(2);
-      setRelated(relData || []);
+    try {
+      const res = await fetch(`/api/portfolio/${slug}`);
+      if (res.ok) {
+        const data = await res.json();
+        setProject(data.project);
+        setRelated(data.related || []);
+      }
+    } catch (err) {
+      console.error("Error fetching project:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   if (loading) {

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { supabase } from '../../../lib/supabase';
+import { query } from '../../../lib/db';
 import { generateEmailHTML } from '../../../lib/emailTemplate';
 
 export async function POST(req) {
@@ -9,25 +9,24 @@ export async function POST(req) {
     const { name, email, phone, service, date, time } = data;
 
     // 1. Check for existing booking on same date
-    if (supabase) {
-      const { data: existingBookings } = await supabase
-        .from('bookings')
-        .select('id')
-        .eq('email', email)
-        .eq('booking_date', date);
+    const existingBookings = await query(
+      'SELECT id FROM bookings WHERE email = ? AND booking_date = ?',
+      [email, date]
+    );
 
-      if (existingBookings && existingBookings.length > 0) {
-        return NextResponse.json({ success: false, error: "You already have a meeting scheduled for this date." }, { status: 400 });
-      }
+    if (existingBookings && existingBookings.length > 0) {
+      return NextResponse.json({ success: false, error: "You already have a meeting scheduled for this date." }, { status: 400 });
+    }
 
-      // 2. Save to Supabase
-      const { error: dbError } = await supabase.from('bookings').insert([{ 
-        name, email, phone, service, booking_date: date, booking_time: time 
-      }]);
-      
-      if (dbError) {
-        console.error("Supabase insert error:", dbError);
-      }
+    // 2. Save to MySQL
+    try {
+      await query(
+        'INSERT INTO bookings (name, email, phone, service, booking_date, booking_time) VALUES (?, ?, ?, ?, ?, ?)',
+        [name, email, phone || null, service, date, time]
+      );
+    } catch (dbError) {
+      console.error("MySQL insert booking error:", dbError);
+      return NextResponse.json({ success: false, error: "Database error. Please try again." }, { status: 500 });
     }
 
     // 2. Setup NodeMailer Transporter

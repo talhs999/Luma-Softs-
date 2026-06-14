@@ -1,18 +1,20 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { supabase } from '../../../lib/supabase';
+import { query } from '../../../lib/db';
 import { generateEmailHTML } from '../../../lib/emailTemplate';
 export async function POST(req) {
   try {
     const data = await req.json();
     const { name, email, phone, subject, message } = data;
 
-    // 1. Save to Supabase for your records
-    if (supabase) {
-      const { error: dbError } = await supabase.from('messages').insert([{ name, email, phone, subject, message }]);
-      if (dbError) {
-        console.error("Supabase insert error:", dbError);
-      }
+    // 1. Save to local MySQL database
+    try {
+      await query(
+        'INSERT INTO messages (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)',
+        [name, email, phone || null, subject || null, message]
+      );
+    } catch (dbError) {
+      console.error("MySQL insert error:", dbError);
     }
 
     // 2. Send Email to info@lumasofts.com

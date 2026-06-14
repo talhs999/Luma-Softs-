@@ -1,17 +1,14 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { supabase } from '../../../../lib/supabase';
+import { query } from '../../../../lib/db';
 import { generateEmailHTML } from '../../../../lib/emailTemplate';
 
 export async function POST(req) {
   try {
     const { booking, newStatus } = await req.json();
 
-    // 1. Update in Supabase
-    if (supabase) {
-      const { error } = await supabase.from('bookings').update({ status: newStatus }).eq('id', booking.id);
-      if (error) throw error;
-    }
+    // 1. Update in local MySQL
+    await query('UPDATE bookings SET status = ? WHERE id = ?', [newStatus, booking.id]);
 
     // 2. Setup NodeMailer Transporter
     const transporter = nodemailer.createTransport({

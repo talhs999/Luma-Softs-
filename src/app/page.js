@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { supabase } from "../lib/supabase";
+
 import { FAQS } from "./faq/page";
 import { Globe, Cpu, Smartphone, Palette, PenTool, Bot, Trophy, Rocket, Handshake, DollarSign, Zap, Quote, Star, ArrowRight, Scale, ShoppingCart, HardHat, Plane, Heart, Utensils, Users, Home as HomeIcon, Anchor, BookOpen, Sparkles, FileText, Plus, Minus } from "lucide-react";
 import { FaReact, FaNodeJs, FaFigma, FaAws } from "react-icons/fa";
@@ -91,8 +91,15 @@ export default function Home() {
   }, []);
 
   const fetchReviews = async () => {
-    const { data } = await supabase.from("reviews").select("*").order("created_at", { ascending: true });
-    if (data) setReviews(data);
+    try {
+      const res = await fetch("/api/reviews");
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        setReviews(data);
+      }
+    } catch (err) {
+      console.error("Error fetching reviews:", err);
+    }
   };
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { supabase } from "../../../lib/supabase";
+
 import { Edit2, Trash2, Plus, X, Star } from "lucide-react";
 
 export default function AdminReviewsPage() {
@@ -23,11 +23,17 @@ export default function AdminReviewsPage() {
 
   const fetchReviews = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("reviews").select("*").order("created_at", { ascending: false });
-    if (!error && data) {
-      setReviews(data);
+    try {
+      const res = await fetch("/api/admin/reviews");
+      if (res.ok) {
+        const data = await res.json();
+        setReviews(data);
+      }
+    } catch (err) {
+      console.error("Error fetching reviews:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleOpenModal = (review = null) => {
@@ -54,22 +60,39 @@ export default function AdminReviewsPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editingId) {
-      const { error } = await supabase.from("reviews").update(formData).eq("id", editingId);
-      if (error) alert("Error updating review: " + error.message);
-    } else {
-      const { error } = await supabase.from("reviews").insert([formData]);
-      if (error) alert("Error adding review: " + error.message);
+    try {
+      const method = editingId ? "PUT" : "POST";
+      const payload = editingId ? { ...formData, id: editingId } : formData;
+
+      const res = await fetch("/api/admin/reviews", {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to save review");
+
+      handleCloseModal();
+      fetchReviews();
+    } catch (error) {
+      alert("Error saving review: " + error.message);
     }
-    handleCloseModal();
-    fetchReviews();
   };
 
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this review?")) {
-      const { error } = await supabase.from("reviews").delete().eq("id", id);
-      if (error) alert("Error deleting review: " + error.message);
-      else fetchReviews();
+      try {
+        const res = await fetch(`/api/admin/reviews?id=${id}`, {
+          method: "DELETE"
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to delete review");
+        
+        fetchReviews();
+      } catch (error) {
+        alert("Error deleting review: " + error.message);
+      }
     }
   };
 

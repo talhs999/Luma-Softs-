@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { User } from "lucide-react";
-import { supabase } from "../lib/supabase";
+
 
 // Raw SVGs for icons that might not exist in the older lucide-react version
 const CloseIcon = ({ size }) => (
@@ -28,14 +28,11 @@ export default function TeamSection() {
 
   const fetchTeam = async () => {
     try {
-      if (!supabase) return;
-      const { data, error } = await supabase
-        .from("team_members")
-        .select("*")
-        .order("created_at", { ascending: true });
-      
-      if (error) throw error;
-      setTeam(data || []);
+      const res = await fetch("/api/admin/team");
+      if (res.ok) {
+        const data = await res.json();
+        setTeam(data || []);
+      }
     } catch (err) {
       console.error("Error fetching team:", err.message);
     } finally {

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { supabase } from "../../../lib/supabase";
+
 import { Plus, Edit2, Trash2, Image as ImageIcon, X, Save, RefreshCw } from "lucide-react";
 
 export default function AdminPortfolioPage() {
@@ -32,10 +32,17 @@ export default function AdminPortfolioPage() {
 
   const fetchProjects = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("portfolio").select("*").order("created_at", { ascending: false });
-    if (error) console.error("Error fetching projects:", error);
-    else setProjects(data || []);
-    setLoading(false);
+    try {
+      const res = await fetch("/api/admin/portfolio");
+      if (res.ok) {
+        const data = await res.json();
+        setProjects(data || []);
+      }
+    } catch (err) {
+      console.error("Error fetching projects:", err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const openAddModal = () => {
@@ -78,49 +85,72 @@ export default function AdminPortfolioPage() {
     const file = e.target.files[0];
     if (!file) return;
 
-    setUploading(true);
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Math.random()}.${fileExt}`;
-    const filePath = `${fileName}`;
+    try {
+      setUploading(true);
+      const formDataUpload = new FormData();
+      formDataUpload.append("file", file);
 
-    const { error: uploadError } = await supabase.storage.from("portfolio_images").upload(filePath, file);
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formDataUpload
+      });
 
-    if (uploadError) {
-      alert("Error uploading image: " + uploadError.message);
-    } else {
-      const { data } = supabase.storage.from("portfolio_images").getPublicUrl(filePath);
-      setForm({ ...form, featured_image: data.publicUrl });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Upload failed");
+
+      setForm({ ...form, featured_image: data.url });
+    } catch (error) {
+      alert("Error uploading image: " + error.message);
+    } finally {
+      setUploading(false);
     }
-    setUploading(false);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSaving(true);
 
-    const projectData = {
-      ...form,
-      slug: form.slug || generateSlug(form.title),
-      technologies: form.technologies.split(",").map(t => t.trim()).filter(Boolean)
-    };
+    try {
+      const projectData = {
+        ...form,
+        slug: form.slug || generateSlug(form.title),
+        technologies: form.technologies.split(",").map(t => t.trim()).filter(Boolean)
+      };
 
-    if (isEditing) {
-      const { error } = await supabase.from("portfolio").update(projectData).eq("id", currentId);
-      if (error) alert("Error updating: " + error.message);
-      else { setIsModalOpen(false); fetchProjects(); }
-    } else {
-      const { error } = await supabase.from("portfolio").insert([projectData]);
-      if (error) alert("Error adding: " + error.message);
-      else { setIsModalOpen(false); fetchProjects(); }
+      const method = isEditing ? "PUT" : "POST";
+      const body = isEditing ? { ...projectData, id: currentId } : projectData;
+
+      const res = await fetch("/api/admin/portfolio", {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to save project");
+
+      setIsModalOpen(false);
+      fetchProjects();
+    } catch (error) {
+      alert("Error saving: " + error.message);
+    } finally {
+      setSaving(false);
     }
-    setSaving(false);
   };
 
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this project?")) {
-      const { error } = await supabase.from("portfolio").delete().eq("id", id);
-      if (error) alert("Error deleting: " + error.message);
-      else fetchProjects();
+      try {
+        const res = await fetch(`/api/admin/portfolio?id=${id}`, {
+          method: "DELETE"
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Failed to delete project");
+
+        fetchProjects();
+      } catch (error) {
+        alert("Error deleting: " + error.message);
+      }
     }
   };
 

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { supabase } from "../../lib/supabase";
+
 import { Globe, ShoppingCart, Cpu, Smartphone, Target, PenTool, BarChart3, Bot, FileText, Settings, Brush, LineChart, Plug, Video, Cloud, Shield, Search, Monitor } from "lucide-react";
 
 // Map string icon names to Lucide components
@@ -32,11 +32,17 @@ export default function ServicesPage() {
 
   useEffect(() => {
     const fetchServices = async () => {
-      const { data, error } = await supabase.from("services").select("*").order("created_at", { ascending: true });
-      if (!error && data) {
-        setServices(data);
+      try {
+        const res = await fetch("/api/services");
+        const data = await res.json();
+        if (Array.isArray(data)) {
+          setServices(data);
+        }
+      } catch (err) {
+        console.error("Error fetching services:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
     fetchServices();
   }, []);

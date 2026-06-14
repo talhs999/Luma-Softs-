@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { supabase } from "../../../lib/supabase";
+
 import { Calendar, Clock, User, Mail, Phone, ChevronDown, Check, X, Tag, Trash2 } from "lucide-react";
 
 export default function AdminBookingsPage() {
@@ -13,11 +13,17 @@ export default function AdminBookingsPage() {
 
   const fetchBookings = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("bookings").select("*").order("created_at", { ascending: false });
-    if (!error && data) {
-      setBookings(data);
+    try {
+      const res = await fetch("/api/admin/bookings");
+      if (res.ok) {
+        const data = await res.json();
+        setBookings(data);
+      }
+    } catch (err) {
+      console.error("Error fetching bookings:", err);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const updateStatus = async (booking, newStatus) => {
@@ -38,8 +44,10 @@ export default function AdminBookingsPage() {
   const deleteBooking = async (id) => {
     if (!confirm("Are you sure you want to delete this booking?")) return;
     try {
-      const { error } = await supabase.from("bookings").delete().eq("id", id);
-      if (error) throw error;
+      const res = await fetch(`/api/admin/bookings?id=${id}`, {
+        method: "DELETE"
+      });
+      if (!res.ok) throw new Error("Delete request failed");
       fetchBookings();
     } catch (error) {
       alert("Error deleting booking.");

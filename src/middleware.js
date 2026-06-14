@@ -7,7 +7,7 @@ export async function middleware(request) {
     // For now, we are using a simple cookie check until Supabase SSR is fully configured.
     // When the user logs in via Supabase, we can set a 'sb-access-token' or check Supabase session.
     // If you want a strict redirect to Home for unauthenticated users:
-    const authCookie = request.cookies.get('sb-access-token') || request.cookies.get('supabase-auth-token');
+    const authCookie = request.cookies.get('sb-access-token') || request.cookies.get('supabase-auth-token') || request.cookies.get('admin-token');
     
     // If no valid auth session found, redirect to Home ("/")
     if (!authCookie) {

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Settings, Briefcase, Users, Mail, RefreshCw } from "lucide-react";
-import { supabase } from "../../lib/supabase";
+
 import { ALL_SERVICES } from "../../data/services";
 
 export default function AdminDashboard() {
@@ -22,29 +22,20 @@ export default function AdminDashboard() {
     setLoading(true);
     
     try {
-      // Fetch exact counts
-      const { count: portfolioCount } = await supabase.from('portfolio').select('*', { count: 'exact', head: true });
-      const { count: teamCount } = await supabase.from('team_members').select('*', { count: 'exact', head: true });
-      const { count: messagesCount } = await supabase.from('messages').select('*', { count: 'exact', head: true });
+      const res = await fetch("/api/admin/dashboard");
+      if (!res.ok) throw new Error("Failed to fetch dashboard data");
+      const data = await res.json();
 
       setStats({
         services: ALL_SERVICES.length,
-        portfolio: portfolioCount || 0,
-        team: teamCount || 0,
-        messages: messagesCount || 0
+        portfolio: data.stats.portfolio,
+        team: data.stats.team,
+        messages: data.stats.messages
       });
 
-      // Fetch recent messages for activity
-      const { data: recentMessages } = await supabase
-        .from('messages')
-        .select('name, created_at')
-        .order('created_at', { ascending: false })
-        .limit(4);
-
-      if (recentMessages) {
-        setRecentActivity(recentMessages.map(msg => {
+      if (data.recentMessages) {
+        setRecentActivity(data.recentMessages.map(msg => {
           const time = new Date(msg.created_at);
-          // Simple time formatting logic
           const diff = Math.floor((new Date() - time) / 1000);
           let timeAgo = "";
           if (diff < 60) timeAgo = "just now";
@@ -58,11 +49,11 @@ export default function AdminDashboard() {
           };
         }));
       }
-    } catch (error) {
-      console.error("Dashboard fetch error:", error);
+    } catch (err) {
+      console.error("Error fetching dashboard data:", err);
+    } finally {
+      setLoading(false);
     }
-    
-    setLoading(false);
   };
 
   const STAT_CARDS = [

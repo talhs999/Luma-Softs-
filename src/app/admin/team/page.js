@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { supabase } from "../../../lib/supabase";
+
 import { User } from "lucide-react";
 
 export default function AdminTeamPage() {
@@ -20,9 +20,11 @@ export default function AdminTeamPage() {
 
   const fetchTeam = async () => {
     try {
-      const { data, error } = await supabase.from("team_members").select("*").order("created_at", { ascending: true });
-      if (error) throw error;
-      setTeam(data || []);
+      const res = await fetch("/api/admin/team");
+      if (res.ok) {
+        const data = await res.json();
+        setTeam(data || []);
+      }
     } catch (error) {
       console.error("Error fetching team:", error.message);
     } finally {
@@ -44,13 +46,18 @@ export default function AdminTeamPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (editingId) {
-        const { error } = await supabase.from("team_members").update(formData).eq("id", editingId);
-        if (error) throw error;
-      } else {
-        const { error } = await supabase.from("team_members").insert([formData]);
-        if (error) throw error;
-      }
+      const method = editingId ? "PUT" : "POST";
+      const payload = editingId ? { ...formData, id: editingId } : formData;
+
+      const res = await fetch("/api/admin/team", {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to save member");
+
       setModalOpen(false);
       fetchTeam();
     } catch (error) {
@@ -61,8 +68,12 @@ export default function AdminTeamPage() {
   const handleDelete = async (id) => {
     if (!confirm("Are you sure you want to delete this team member?")) return;
     try {
-      const { error } = await supabase.from("team_members").delete().eq("id", id);
-      if (error) throw error;
+      const res = await fetch(`/api/admin/team?id=${id}`, {
+        method: "DELETE"
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to delete member");
+
       fetchTeam();
     } catch (error) {
       alert("Error deleting member: " + error.message);
