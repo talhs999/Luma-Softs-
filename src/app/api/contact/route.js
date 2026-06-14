@@ -92,7 +92,7 @@ export async function POST(req) {
       }
 
     } else {
-      console.warn("⚠️ SMTP credentials not found in .env.local. Email bypassed, but message saved to Supabase.");
+      console.warn("⚠️ SMTP credentials not found in .env.local. Email bypassed, but message saved to database.");
     }
 
     return NextResponse.json({ success: true, message: "Message sent successfully" });
