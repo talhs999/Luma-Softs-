@@ -1,16 +1,13 @@
 import { NextResponse } from 'next/server';
 
 export async function middleware(request) {
-  // If the user tries to access /admin
+  // Protect all /admin routes
   if (request.nextUrl.pathname.startsWith('/admin')) {
+    // Check for valid admin session cookie (set on login)
+    const authCookie = request.cookies.get('admin-token') || request.cookies.get('sb-access-token');
     
-    // For now, we are using a simple cookie check until Supabase SSR is fully configured.
-    // When the user logs in via Supabase, we can set a 'sb-access-token' or check Supabase session.
-    // If you want a strict redirect to Home for unauthenticated users:
-    const authCookie = request.cookies.get('sb-access-token') || request.cookies.get('supabase-auth-token') || request.cookies.get('admin-token');
-    
-    // If no valid auth session found, redirect to Home ("/")
-    if (!authCookie) {
+    // If no valid auth session found, redirect to Home
+    if (!authCookie || authCookie.value !== 'authenticated_luma_admin') {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
@@ -21,3 +18,4 @@ export async function middleware(request) {
 export const config = {
   matcher: ['/admin/:path*'],
 };
+
