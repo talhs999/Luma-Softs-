@@ -30,6 +30,9 @@ export const metadata = {
     siteName: "Luma Softs",
     type: "website",
   },
+  verification: {
+    google: "gW3ieRAMY6HWdimuZADxTWs2lgqF48ySA5cxfFcogmU",
+  },
 };
 
 import Chatbot from "../components/Chatbot";
