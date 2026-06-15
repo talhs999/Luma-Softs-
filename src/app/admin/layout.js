@@ -8,6 +8,7 @@ const ADMIN_NAV = [
   { href: "/admin", label: "Dashboard", icon: <LayoutDashboard size={20} /> },
   { href: "/admin/services", label: "Services", icon: <Settings size={20} /> },
   { href: "/admin/portfolio", label: "Portfolio", icon: <Briefcase size={20} /> },
+  { href: "/admin/blogs", label: "Blogs", icon: <ImageIcon size={20} /> },
   { href: "/admin/reviews", label: "Reviews", icon: <Star size={20} /> },
   { href: "/admin/bookings", label: "Bookings", icon: <Calendar size={20} /> },
   { href: "/admin/team", label: "Team", icon: <Users size={20} /> },

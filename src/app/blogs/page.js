@@ -1,14 +1,23 @@
 import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { ALL_BLOGS } from "../../data/blogs";
+import { query } from "../../lib/db";
 
 export const metadata = {
   title: "Blogs & Insights | Luma Softs",
   description: "Read the latest insights on software development, AI, UI/UX design, and digital marketing from Luma Softs experts.",
 };
 
-export default function BlogsPage() {
+export const revalidate = 0; // Ensures it fetches fresh blogs on every load
+
+export default async function BlogsPage() {
+  let ALL_BLOGS = [];
+  try {
+    ALL_BLOGS = await query('SELECT slug, title, category, date, description AS `desc` FROM blogs ORDER BY created_at DESC');
+  } catch (error) {
+    console.error("Failed to fetch blogs from db:", error);
+  }
+
   return (
     <section style={{ padding: "4rem 0 6rem" }}>
       <div className="section-container">

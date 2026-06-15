@@ -1,16 +1,38 @@
 import React from "react";
 import Link from "next/link";
-import { ALL_BLOGS } from "../../../data/blogs";
+import { query } from "../../../lib/db";
 
-export async function generateStaticParams() {
-  return ALL_BLOGS.map((blog) => ({
-    slug: blog.slug,
-  }));
+// Revalidate 0 ensures we always fetch the latest from the database
+export const revalidate = 0;
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  let title = "Blog | Luma Softs";
+  let description = "Read our latest blog post.";
+  try {
+    const blogs = await query('SELECT title, description FROM blogs WHERE slug = ? LIMIT 1', [slug]);
+    if (blogs && blogs.length > 0) {
+      title = `${blogs[0].title} | Luma Softs`;
+      description = blogs[0].description;
+    }
+  } catch (err) {}
+  
+  return { title, description };
 }
 
 export default async function BlogDetailPage({ params }) {
   const { slug } = await params;
-  const blog = ALL_BLOGS.find((b) => b.slug === slug);
+  
+  let blog = null;
+  try {
+    const blogs = await query('SELECT * FROM blogs WHERE slug = ? LIMIT 1', [slug]);
+    if (blogs && blogs.length > 0) {
+      blog = blogs[0];
+    }
+  } catch (error) {
+    console.error("Failed to fetch blog detail:", error);
+  }
+
   if (!blog) {
     return (
       <section style={{ padding: "8rem 0", textAlign: "center" }}>
@@ -24,6 +46,7 @@ export default async function BlogDetailPage({ params }) {
 
   // Simple Markdown-like renderer for content
   const renderContent = (content) => {
+    if (!content) return null;
     return content.split("\n").map((line, index) => {
       const trimmed = line.trim();
       if (trimmed.startsWith("## ")) {
@@ -62,7 +85,7 @@ export default async function BlogDetailPage({ params }) {
             {blog.title}
           </h1>
           <p style={{ fontSize: "1.25rem", color: "var(--gray)", lineHeight: 1.6 }}>
-            {blog.desc}
+            {blog.description}
           </p>
         </div>
 
