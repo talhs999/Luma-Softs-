@@ -1,9 +1,19 @@
 import { ALL_SERVICES } from '../data/services';
-import { ALL_BLOGS } from '../data/blogs';
 import { ALL_PORTFOLIO } from '../data/portfolio';
+import { query } from '../lib/db';
 
-export default function sitemap() {
+export default async function sitemap() {
   const baseUrl = 'https://lumasofts.com';
+
+  let blogs = [];
+  try {
+    blogs = await query({
+      query: 'SELECT slug FROM blogs ORDER BY created_at DESC',
+      values: [],
+    });
+  } catch (error) {
+    console.error("Failed to fetch blogs for sitemap:", error);
+  }
 
   // Static routes
   const staticRoutes = [
@@ -32,7 +42,7 @@ export default function sitemap() {
   }));
 
   // Dynamic Blog routes
-  const blogRoutes = ALL_BLOGS.map((blog) => ({
+  const blogRoutes = blogs.map((blog) => ({
     url: `${baseUrl}/blogs/${blog.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
