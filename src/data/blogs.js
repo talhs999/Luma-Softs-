@@ -1,157 +1,145 @@
 export const ALL_BLOGS = [
   {
-    slug: "future-of-ai",
-    title: "The Future of AI in Software Engineering",
-    category: "Technology",
-    date: "June 2, 2026",
-    desc: "How agentic AI and LLMs are revolutionizing the way we write code and build digital products.",
+    slug: "website-cost-in-karachi-2026",
+    title: "How Much Does a Website Cost in Karachi? Complete 2026 Price Guide",
+    category: "Web Development",
+    date: "June 15, 2026",
+    desc: "Thinking of taking your business online? Find out the exact cost of building a website in Karachi, from simple landing pages to full e-commerce stores.",
     content: `
-      Artificial Intelligence is rapidly evolving from basic code completion tools to fully autonomous agentic systems. In software engineering, this shift represents a paradigm change in how products are built, tested, and maintained.
-      
-      ## The Rise of Agentic AI
-      Unlike previous generations of AI that only provided suggestions, agentic AI can take actions, read codebases, and write complex implementations autonomously. Tools like Gemini and specialized coding agents are already demonstrating the ability to resolve bugs and build features end-to-end. This is not just a marginal improvement; it's a completely new way of working. Agentic AI can understand context, run tests, and even self-correct when an error is thrown.
-      
-      ## What This Means for Developers
-      Developers will shift from being "code writers" to "system architects." The focus will move towards understanding business requirements, system design, and security, while the AI handles the boilerplate and implementation details. The human element will be more important than ever for ensuring that the software solves the right problems.
-      
-      ## Quality Assurance and Testing
-      With AI writing the code, who tests it? The answer is AI, guided by human oversight. AI-driven test generation ensures that edge cases are covered more comprehensively than manual testing ever could. However, humans will still need to define the testing parameters and ensure the final product aligns with user expectations.
-      
-      ## Conclusion
-      At Luma Softs, we integrate these AI capabilities directly into our workflow to deliver high-quality software faster than ever before. The future is not about replacing developers, but empowering them to build more ambitious products. By embracing these tools, agencies and clients alike can reach the market faster and with fewer bugs.
+If you run a business in Karachi, whether it's a shop in Tariq Road or an agency in Shahrah-e-Faisal, you know that having an online presence is no longer optional. But the first question every business owner asks is: *"Website banana kitna mehnga hai?"* (How much does a website cost?)
+
+In this guide, we break down the real costs of web development in Karachi for 2026, so you know exactly what you are paying for.
+
+## 1. Domain & Hosting (The Foundation)
+Before anyone writes a single line of code, you need a name (Domain) and space (Hosting). 
+- **Domain (.com or .pk):** Rs. 3,500 – Rs. 6,000 per year.
+- **Good Quality Hosting:** Rs. 10,000 – Rs. 25,000 per year.
+*Beware of agencies offering "Rs. 2,000 hosting"* — your site will crash when traffic increases!
+
+## 2. Basic Business Website (Rs. 40,000 – Rs. 80,000)
+If you need a 4-5 page website to showcase your services (Home, About, Services, Contact), this is the budget. It usually includes a responsive design, WhatsApp integration, and a contact form.
+
+## 3. Custom E-Commerce Store (Rs. 100,000 – Rs. 300,000+)
+For selling products online (like clothing, electronics, or food), you need a store. The cost depends on the platform:
+- **Shopify/WooCommerce:** Starts from Rs. 80,000.
+- **Custom React/Next.js Store:** Starts from Rs. 150,000 (Best for speed and large inventory).
+
+## 4. Maintenance & SEO (The Hidden Costs)
+Building a website is just step one. To rank on Google and keep it secure, you need monthly maintenance and SEO.
+- **SEO Services in Karachi:** Rs. 30,000 – Rs. 100,000/month.
+
+## Conclusion
+Don't fall for "5,000 ki website" scams. A cheap website hurts your brand and drives customers away. At **Luma Softs**, we provide premium, high-speed websites tailored for Pakistani businesses. Contact us today for a free consultation!
     `
   },
   {
-    slug: "ui-ux-trends-2026",
-    title: "10 UI/UX Trends to Watch in 2026",
-    category: "Design",
+    slug: "google-my-business-setup-karachi",
+    title: "How to Set Up Google My Business for Karachi Business Owners",
+    category: "Local SEO",
+    date: "June 10, 2026",
+    desc: "Want customers from your neighborhood to find you easily? Learn how to rank your business on Google Maps in Karachi.",
+    content: `
+Imagine someone in Malir searching for "best restaurant near me" or someone in DHA searching for "plumber in Karachi." If your business doesn't show up on Google Maps, you are losing money to your competitors.
+
+This is where **Local SEO** and **Google My Business (GMB)** come in. 
+
+## Step 1: Claim Your Business Profile
+Go to google.com/business and sign in. Enter your exact business name. Make sure it matches what's written on your signboard.
+
+## Step 2: Set the Exact Karachi Address
+Google relies heavily on accurate locations. Whether you are in Gulshan-e-Iqbal, Malir, or Clifton, drop the pin exactly on your shop or office. If you don't have a physical store, you can select "Service Area Business" and choose Karachi.
+
+## Step 3: Add High-Quality Photos
+Pakistani consumers love to see what they are buying. Upload bright, clear photos of your storefront, your products, and your team. Profiles with photos get 42% more requests for directions.
+
+## Step 4: Get Local Reviews
+Reviews are the secret weapon for Local SEO. Ask your happy customers to leave a 5-star review. You can even send them a direct WhatsApp link to review your business. Reply to *every* review, even the bad ones, in a professional manner.
+
+## Step 5: Optimize for Urdu/Roman Urdu Keywords
+Many people in Karachi search using Roman Urdu (e.g., "Sasta laptop kahan se milega Karachi"). Include these natural phrases in your business description and Q&A section.
+
+Need help dominating local search in Karachi? **Luma Softs** specializes in Local SEO that brings foot traffic to your door.
+    `
+  },
+  {
+    slug: "how-to-rank-on-google-first-page-pakistan",
+    title: "How to Rank on Google First Page — Complete SEO Guide for Pakistan 2026",
+    category: "SEO",
+    date: "June 5, 2026",
+    desc: "Stop paying for ads forever. Learn the exact SEO strategies to rank your Pakistani business on page one of Google.",
+    content: `
+Getting to the first page of Google is the ultimate goal for any business. In Pakistan, the competition is growing, but with the right SEO strategy, you can easily outrank older businesses. Here is the 2026 guide to SEO in Pakistan.
+
+## 1. Fast Loading Speeds (Crucial for Pakistan)
+Mobile internet in Pakistan can sometimes be slow. If your website takes more than 3 seconds to load, the user will leave. Google penalizes slow websites. We build sites using **Next.js**, which guarantees blazing fast speeds even on 3G connections.
+
+## 2. Target the Right Keywords
+Don't just target "Shoes." Target "Buy men's leather shoes in Karachi." Long-tail keywords have less competition and bring buyers who are ready to purchase. Use tools like Google Keyword Planner to see what Pakistanis are actually searching for.
+
+## 3. High-Quality, Helpful Content
+Google’s new AI algorithms prioritize content that actually helps the user. Write detailed blogs answering common questions your local clients ask. 
+
+## 4. Quality Backlinks
+A backlink is when another website links to yours. It acts as a "vote of confidence." Get featured in local Pakistani business directories, news sites, or partner with other local businesses to exchange links.
+
+## 5. Mobile-First Optimization
+Over 70% of web traffic in Pakistan comes from mobile phones. Your site must look and work perfectly on a smartphone. 
+
+SEO takes 3 to 6 months to show results, but once you rank, the traffic is free and consistent. Ready to take the #1 spot? Let **Luma Softs** handle your SEO strategy.
+    `
+  },
+  {
+    slug: "facebook-ads-pakistan-500-rs-day",
+    title: "How to Run Facebook Ads in Pakistan — Start with Just Rs. 500/Day",
+    category: "Digital Marketing",
     date: "May 28, 2026",
-    desc: "Explore the latest design trends including glassmorphism, 3D elements, and hyper-minimalism.",
+    desc: "Think Facebook Ads are too expensive? Learn how small businesses in Karachi are generating leads with just Rs. 500 a day.",
     content: `
-      The digital landscape is constantly changing, and UI/UX design is at the forefront of this evolution. As we move deeper into 2026, several key trends are shaping the way we interact with digital products.
-      
-      ## 1. Advanced Glassmorphism
-      The frosted glass effect has matured. Now combined with dynamic lighting, glowing neon accents, and deep shadows, it creates a premium, depth-rich interface. This style is heavily adopted in fintech and premium SaaS applications.
-      
-      ## 2. Immersive 3D Elements
-      With WebGL becoming more accessible, 3D illustrations and interactive elements are replacing flat vector graphics. Users expect to interact with products in a three-dimensional space, even on traditional 2D screens.
-      
-      ## 3. Dark Mode as Default
-      Dark mode is no longer an alternative; it's the standard. Designs are built with dark themes first to reduce eye strain and provide a sleeker look. High-contrast neon colors on deep black backgrounds (like our own Luma Softs aesthetic) are particularly popular.
-      
-      ## 4. Micro-Interactions
-      Subtle animations that provide feedback—like a button glowing on hover, a smooth page transition, or a skeleton loader—are essential for a modern feel. These interactions make the application feel alive and responsive.
-      
-      ## 5. Voice User Interfaces (VUI)
-      With the ubiquity of smart speakers and advanced natural language processing, designing for voice is now as important as designing for screens. Visual interfaces are adapting to show voice input states clearly.
-      
-      ## Conclusion
-      Design is no longer just about looking good; it's about feeling good. The trends of 2026 focus heavily on the psychological impact of design, ensuring that users feel engaged, relaxed, and empowered when using digital products.
+"Facebook ads mere business ke liye nahi hain, budget nahi hai." (Facebook ads aren't for my business, I don't have the budget.) 
+
+This is the biggest myth among small business owners in Pakistan. You don't need millions of rupees. You can start generating real leads for just Rs. 500 a day. Here’s how.
+
+## 1. Stop Using the "Boost Post" Button
+The blue "Boost Post" button is a trap. It gets you likes, but rarely sales. Instead, use the **Facebook Ads Manager**. It gives you deep targeting options and better control over your budget.
+
+## 2. Hyper-Local Targeting
+If you run a salon in Malir, don't show your ads to people in Lahore. Drop a pin on your location and set a 5km radius. Your Rs. 500 will go much further because you are only targeting people who can actually visit you.
+
+## 3. Focus on Video Ads
+Pakistani audiences engage heavily with video content. You don't need a professional camera. A simple smartphone video showing your product or explaining your service in Urdu/Hindi works wonders. It builds trust instantly.
+
+## 4. Use WhatsApp as Your Destination
+Instead of sending traffic to a website, run "Send WhatsApp Message" ads. People in Pakistan prefer chatting on WhatsApp before making a purchase. This allows you to close the sale personally.
+
+## 5. Test and Learn
+Spend Rs. 500 for 3 days. See what works. If an ad gets good messages, increase the budget. If not, turn it off and try a new video or image.
+
+Want professional help managing your ad spend? **Luma Softs** runs high-converting ad campaigns that maximize your ROI.
     `
   },
   {
-    slug: "why-nextjs",
-    title: "Why Next.js is the Ultimate Framework",
-    category: "Development",
-    date: "May 15, 2026",
-    desc: "A deep dive into server components, edge rendering, and why we build all our clients' sites with Next.js.",
+    slug: "grow-business-using-ai-pakistan",
+    title: "How to Grow Your Business Using AI — Guide for Pakistani Entrepreneurs",
+    category: "AI & Technology",
+    date: "May 20, 2026",
+    desc: "Artificial Intelligence isn't just for Silicon Valley. Learn how local businesses in Pakistan are using AI to save time and increase sales.",
     content: `
-      When it comes to building modern, high-performance web applications, Next.js has cemented its position as the industry leader. But what makes it so special compared to traditional React or other frameworks?
-      
-      ## React Server Components
-      The introduction of React Server Components (RSC) allows developers to render components on the server by default. This significantly reduces the amount of JavaScript sent to the browser, resulting in lightning-fast load times. It also allows developers to query databases directly from the component without needing a separate API layer.
-      
-      ## Built-in SEO Capabilities
-      Next.js handles metadata, canonical tags, and OpenGraph images seamlessly. Server-side rendering ensures that search engines can crawl and index your site effectively. Unlike client-side rendered Single Page Applications (SPAs), Next.js sites rank exceptionally well on Google.
-      
-      ## Edge Computing
-      With edge middleware, code executes closer to the user, providing incredibly fast response times for personalization and authentication. You can intercept requests at the edge and modify responses before they even hit your main server.
-      
-      ## The Vercel Ecosystem
-      Next.js is backed by Vercel, providing an unparalleled deployment experience. Features like preview deployments for every pull request make collaboration with clients and stakeholders incredibly smooth.
-      
-      At Luma Softs, Next.js is our framework of choice because it provides the perfect balance of developer experience and end-user performance. It allows us to deliver enterprise-grade applications to startups and large corporations alike.
-    `
-  },
-  {
-    slug: "ecommerce-growth",
-    title: "Scaling Your eCommerce Business with Custom Software",
-    category: "Business",
-    date: "May 10, 2026",
-    desc: "Learn how tailored eCommerce solutions can drastically improve conversion rates and streamline operations.",
-    content: `
-      Off-the-shelf eCommerce platforms like basic Shopify or WooCommerce setups are great for starting out, but as your business grows, their limitations become apparent. Here is why scaling often requires a custom approach.
-      
-      ## The Limitations of Templates
-      Standard templates often suffer from bloat and slow loading speeds. In eCommerce, a one-second delay can cost millions in lost revenue. Custom development ensures your store is optimized for speed, stripping away unnecessary code and focusing entirely on the user journey.
-      
-      ## Complex Integrations
-      As you scale, you need to connect your store with custom ERPs, warehouse management systems, accounting software, and specialized marketing tools. Standard plugins often fail or conflict with each other. Custom software makes these integrations seamless and reliable.
-      
-      ## Unique User Experiences
-      To stand out in a crowded market, your shopping experience must be unique. Custom development allows for tailored product configurators, augmented reality previews, dynamic pricing models, and personalized recommendations driven by machine learning.
-      
-      ## Headless Commerce
-      Moving to a headless architecture—where the frontend (like a Next.js application) is completely separated from the backend (like Shopify Plus or Commerce Layer)—gives you ultimate flexibility. You can deliver a blazing fast storefront while relying on robust backend systems for inventory management.
-      
-      Investing in custom eCommerce software is not just an IT expense; it is a direct investment in your conversion rate and operational efficiency.
-    `
-  },
-  {
-    slug: "seo-in-2026",
-    title: "The New Rules of SEO: AI Search and Beyond",
-    category: "Marketing",
-    date: "April 22, 2026",
-    desc: "Adapt your digital marketing strategy to rank higher in an era of AI-driven search engines.",
-    content: `
-      Search Engine Optimization has changed dramatically with the rise of AI-powered search engines and generative answers. The old tactics of keyword stuffing and low-quality backlinks are no longer effective. Here is how you need to adapt.
-      
-      ## Focus on Intent, Not Just Keywords
-      AI engines are incredibly good at understanding the semantic meaning behind a query. Creating deep, comprehensive content that actually answers the user's question is more important than ensuring a specific keyword appears a certain number of times. Content must be written for humans, not for algorithms.
-      
-      ## Zero-Click Searches
-      Many users get their answers directly from the search engine interface without clicking a link (Generative AI Summaries). Optimizing for featured snippets, providing structured data (Schema markup), and answering questions directly and concisely in the first paragraph of your articles is crucial to maintaining visibility.
-      
-      ## Brand Authority and E-E-A-T
-      Search engines now rely heavily on E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness). Building your brand's authority through high-quality backlinks, expert authorship, and real-world reviews is the new gold standard. Anonymous content is heavily penalized.
-      
-      ## Technical SEO Remains Essential
-      While content is king, technical SEO is the castle. Core Web Vitals, mobile-friendliness, secure connections (HTTPS), and proper indexing are baseline requirements. If your site is slow, no amount of great content will save its ranking.
-    `
-  },
-  {
-    slug: "mobile-app-vs-pwa",
-    title: "Mobile App vs. PWA: Which is Right for Your Business?",
-    category: "Development",
-    date: "April 15, 2026",
-    desc: "A comprehensive comparison between native mobile applications and progressive web apps.",
-    content: `
-      Choosing between a native Mobile App and a Progressive Web App (PWA) is a critical decision for any digital product. Both have their strengths, and the right choice depends entirely on your business goals and user needs. Let's break down the differences.
-      
-      ## Progressive Web Apps (PWAs)
-      PWAs are essentially websites that look and feel like apps. They can be installed on a device directly from the browser, work offline, and send push notifications.
-      **Pros:**
-      - Significantly cheaper and faster to build.
-      - One single codebase for web, iOS, and Android.
-      - Bypasses app store review processes and 30% commission fees.
-      - Always up-to-date for the user.
-      **Cons:**
-      - Limited access to native device hardware (like advanced camera controls or Bluetooth).
-      - Cannot be discovered in the Apple App Store or Google Play Store natively.
-      
-      ## Native Mobile Apps
-      Native apps are built specifically for iOS (Swift) or Android (Kotlin), or using cross-platform frameworks like React Native or Flutter.
-      **Pros:**
-      - Best possible performance and smoothest animations.
-      - Full access to all device features and APIs.
-      - The prestige and discoverability of being in the App Store.
-      **Cons:**
-      - Higher development and maintenance costs.
-      - Users have to download the app before using it, adding friction.
-      - App Store approval processes can delay releases.
-      
-      ## The Verdict
-      If you are building an internal tool, an eCommerce store, or a content platform, a PWA is often the most cost-effective and efficient choice. However, if you are building a complex game, an app that relies heavily on device hardware, or a consumer app where App Store presence is a key marketing channel, Native development is the way to go.
+Artificial Intelligence (AI) is the biggest technological shift since the internet. But how can a local business in Karachi or Lahore actually use it to make money? 
+
+## 1. 24/7 AI Customer Support on WhatsApp
+Customers message at 2 AM asking for prices. If you reply the next morning, they've already bought from someone else. An AI Chatbot can instantly reply to WhatsApp messages, answer FAQs, and even take orders while you sleep.
+
+## 2. Creating Content with ChatGPT
+Struggling to write captions for your Instagram posts or descriptions for your products? Use ChatGPT. You can prompt it: *"Write an engaging Instagram caption in Roman Urdu for my new winter jacket collection."* You will get a ready-to-post caption in seconds.
+
+## 3. Automated Follow-Ups
+AI tools can connect to your CRM and automatically send emails or WhatsApp messages to customers who abandoned their carts or haven't purchased in a while. 
+
+## 4. Better Ad Targeting
+Platforms like Meta (Facebook/Instagram) use machine learning algorithms. By feeding them the right data, their AI will automatically find the people most likely to buy your specific product.
+
+## The Luma Softs Advantage
+At **Luma Softs**, we specialize in integrating AI into your existing business workflows. From custom chatbots to workflow automation, we help you do more with less effort.
     `
   }
 ];
