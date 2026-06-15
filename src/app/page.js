@@ -86,6 +86,33 @@ export default function Home() {
   const [reviews, setReviews] = useState([]);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
+  // Swipe state
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    
+    if (isLeftSwipe) {
+      nextSlide();
+    } else if (isRightSwipe) {
+      prevSlide();
+    }
+  };
+
   useEffect(() => {
     fetchReviews();
   }, []);
@@ -454,7 +481,12 @@ export default function Home() {
         </motion.div>
 
         {reviews.length > 0 ? (
-          <div style={{ paddingBottom: "2rem", width: "100%", overflow: "hidden" }}>
+          <div 
+            style={{ paddingBottom: "2rem", width: "100%", overflow: "hidden" }}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
             <div style={{ display: "flex", gap: "1.5rem", paddingLeft: "1.5rem", paddingRight: "1.5rem", transform: `translateX(calc(-${currentIndex * (25 + 1.5)}%))`, transition: "transform 0.5s ease-in-out" }}>
               {visibleTestimonials.map((t, i) => (
                 <div key={i} onClick={() => setSelectedReview(t)} style={{ flex: "0 0 calc(25% - 1.125rem)", minWidth: "280px", background: "#ffffff", color: "#202124", borderRadius: 12, padding: "1.5rem", boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)", display: "flex", flexDirection: "column", cursor: "pointer", transition: "transform 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.02)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
