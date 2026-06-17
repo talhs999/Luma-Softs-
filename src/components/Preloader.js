@@ -41,7 +41,7 @@ const Preloader = () => {
           font-size: clamp(1.5rem, 5vw, 3rem);
           font-weight: 800;
           letter-spacing: 0.1em;
-          background: linear-gradient(90deg, var(--primary), #00ffcc, #ff00cc, var(--primary));
+          background: linear-gradient(90deg, var(--primary), #fffb00, #39ff14, var(--primary));
           background-size: 300% 100%;
           -webkit-background-clip: text;
           background-clip: text;
