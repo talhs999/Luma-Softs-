@@ -25,13 +25,17 @@ export async function POST(request) {
     
     // Set up Nodemailer transporter
     const transporter = nodemailer.createTransport({
-      host: "smtp.hostinger.com",
+      host: "mail.lumasofts.com",
       port: 465,
       secure: true,
       auth: {
         user: "info@lumasofts.com",
         pass: "pak12345!@#$%",
       },
+      tls: {
+        // Do not fail on invalid certs internally in cPanel
+        rejectUnauthorized: false
+      }
     });
 
     const unsubscribeLink = `https://lumasofts.com/api/unsubscribe?email=${encodeURIComponent(email)}`;

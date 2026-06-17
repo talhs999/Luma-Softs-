@@ -41,13 +41,16 @@ export async function GET(request) {
 
     // Set up Nodemailer transporter
     const transporter = nodemailer.createTransport({
-      host: "smtp.hostinger.com",
+      host: "mail.lumasofts.com",
       port: 465,
       secure: true,
       auth: {
         user: "info@lumasofts.com",
         pass: "pak12345!@#$%",
       },
+      tls: {
+        rejectUnauthorized: false
+      }
     });
 
     let sentCount = 0;
