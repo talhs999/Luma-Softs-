@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
-import { getDbConnection } from "../../../lib/db";
+import { getDbConnection } from "../../../../lib/db";
 import nodemailer from "nodemailer";
-import { generateEmailHTML } from "../../../lib/emailTemplate";
+import { generateEmailHTML } from "../../../../lib/emailTemplate";
 
 export async function GET(request) {
   // Add a simple security check to prevent random people from triggering this
