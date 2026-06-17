@@ -638,7 +638,7 @@ export default function Home() {
             line-height: 1;
             letter-spacing: -0.02em;
             text-align: center;
-            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=2069&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
