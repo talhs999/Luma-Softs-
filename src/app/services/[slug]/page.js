@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 import { Globe, ShoppingCart, Cpu, Smartphone, Target, PenTool, BarChart3, Bot, Check, FileText, Settings, Brush, LineChart, Plug, Video, Cloud, Shield, Search, Monitor } from "lucide-react";
 
@@ -88,7 +89,14 @@ export default function ServiceDetailPage() {
 
         {service.image && (
           <div style={{ marginBottom: "3rem", borderRadius: 16, overflow: "hidden", border: "1px solid var(--border)", width: "100%" }}>
-            <img src={service.image} alt={service.title} style={{ width: "100%", height: "auto", display: "block" }} />
+            <Image 
+              src={service.image} 
+              alt={service.title} 
+              width={1200} 
+              height={600} 
+              style={{ width: "100%", height: "auto", display: "block", objectFit: "cover" }} 
+              priority
+            />
           </div>
         )}
 
