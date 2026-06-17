@@ -65,6 +65,7 @@ export async function POST(request) {
 
   } catch (error) {
     console.error("Subscription Error:", error);
-    return NextResponse.json({ error: "Failed to process subscription" }, { status: 500 });
+    // Return detailed error for debugging
+    return NextResponse.json({ error: "Failed: " + (error.message || "Unknown Error") }, { status: 500 });
   }
 }
