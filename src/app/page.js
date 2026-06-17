@@ -621,6 +621,43 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* ═══ BIG BRAND TEXT ═══ */}
+      <section className="hide-on-mobile" style={{ padding: "2rem 0 8rem 0", background: "var(--bg)", display: "flex", justifyContent: "center" }}>
+        <style>{`
+          .hide-on-mobile {
+            display: flex;
+          }
+          @media (max-width: 900px) {
+            .hide-on-mobile {
+              display: none !important;
+            }
+          }
+          .image-text {
+            font-size: 15vw;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-align: center;
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin: 0;
+            padding: 0;
+            text-transform: uppercase;
+            width: 100%;
+          }
+        `}</style>
+        <div style={{ width: "100%", overflow: "hidden", display: "flex", justifyContent: "center" }}>
+          <h1 className="image-text">
+            LUMA SOFTS
+          </h1>
+        </div>
+      </section>
+
     </>
   );
 }
