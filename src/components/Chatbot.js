@@ -23,6 +23,15 @@ const Chatbot = () => {
     }
   }, [messages, isOpen]);
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("chatbot-open");
+    } else {
+      document.body.classList.remove("chatbot-open");
+    }
+    return () => document.body.classList.remove("chatbot-open");
+  }, [isOpen]);
+
   const handleSend = async (e) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;

@@ -93,6 +93,7 @@ export default function BookingWidget() {
       <AnimatePresence>
         {showButton && (
           <motion.button 
+            className="booking-widget-btn"
             initial={{ scale: 0, x: "-50%" }}
             animate={{ scale: 1, x: "-50%" }}
             exit={{ scale: 0, x: "-50%" }}
@@ -264,6 +265,11 @@ export default function BookingWidget() {
           </div>
         )}
       </AnimatePresence>
+      <style>{`
+        body.chatbot-open .booking-widget-btn {
+          display: none !important;
+        }
+      `}</style>
     </>
   );
 }
