@@ -82,36 +82,8 @@ const waveItem = {
 
 export default function Home() {
   const [selectedReview, setSelectedReview] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-
-  // Swipe state
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-  const minSwipeDistance = 50;
-
-  const onTouchStart = (e) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > minSwipeDistance;
-    const isRightSwipe = distance < -minSwipeDistance;
-    
-    if (isLeftSwipe) {
-      nextSlide();
-    } else if (isRightSwipe) {
-      prevSlide();
-    }
-  };
 
   useEffect(() => {
     fetchReviews();
@@ -132,18 +104,31 @@ export default function Home() {
   useEffect(() => {
     if (reviews.length === 0) return;
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % reviews.length);
+      const slider = document.getElementById("reviews-slider");
+      if (slider) {
+        if (slider.scrollLeft + slider.clientWidth >= slider.scrollWidth - 10) {
+          slider.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          slider.scrollBy({ left: 320, behavior: 'smooth' });
+        }
+      }
     }, 4000);
     return () => clearInterval(timer);
   }, [reviews]);
 
-  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % reviews.length);
-  const prevSlide = () => setCurrentIndex((prev) => (prev - 1 + reviews.length) % reviews.length);
+  const nextSlide = () => {
+    const slider = document.getElementById("reviews-slider");
+    if (slider) slider.scrollBy({ left: 320, behavior: 'smooth' });
+  };
+  const prevSlide = () => {
+    const slider = document.getElementById("reviews-slider");
+    if (slider) slider.scrollBy({ left: -320, behavior: 'smooth' });
+  };
 
   // Show only first 4 FAQs from the General category on Home Page
   const homeFaqs = FAQS[0].questions.slice(0, 4);
 
-  // Triple the array to create an infinite scrolling effect
+  // Use a longer list for smooth scrolling
   const visibleTestimonials = [...reviews, ...reviews, ...reviews];
 
   return (
@@ -481,15 +466,24 @@ export default function Home() {
         </motion.div>
 
         {reviews.length > 0 ? (
-          <div 
-            style={{ paddingBottom: "2rem", width: "100%", overflow: "hidden" }}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
-          >
-            <div style={{ display: "flex", gap: "1.5rem", paddingLeft: "1.5rem", paddingRight: "1.5rem", transform: `translateX(calc(-${currentIndex * (25 + 1.5)}%))`, transition: "transform 0.5s ease-in-out" }}>
+          <div style={{ paddingBottom: "2rem", width: "100%", position: "relative" }}>
+            <div 
+              id="reviews-slider"
+              style={{ 
+                display: "flex", 
+                gap: "1.5rem", 
+                paddingLeft: "1.5rem", 
+                paddingRight: "1.5rem", 
+                overflowX: "auto", 
+                scrollSnapType: "x mandatory",
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                scrollBehavior: "smooth"
+              }}
+            >
+              <style>{`#reviews-slider::-webkit-scrollbar { display: none; }`}</style>
               {visibleTestimonials.map((t, i) => (
-                <div key={i} onClick={() => setSelectedReview(t)} style={{ flex: "0 0 calc(25% - 1.125rem)", minWidth: "280px", background: "#ffffff", color: "#202124", borderRadius: 12, padding: "1.5rem", boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)", display: "flex", flexDirection: "column", cursor: "pointer", transition: "transform 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.02)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
+                <div key={i} onClick={() => setSelectedReview(t)} style={{ flex: "0 0 auto", width: "clamp(280px, 85vw, 350px)", scrollSnapAlign: "center", background: "#ffffff", color: "#202124", borderRadius: 12, padding: "1.5rem", boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)", display: "flex", flexDirection: "column", cursor: "pointer", transition: "transform 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.transform = "scale(1.02)"} onMouseLeave={(e) => e.currentTarget.style.transform = "scale(1)"}>
                   <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
                     <div style={{ width: 40, height: 40, borderRadius: "50%", background: "#4285F4", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold", fontSize: "1.25rem" }}>{t.name.charAt(0)}</div>
                     <div>
