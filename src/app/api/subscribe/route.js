@@ -29,8 +29,8 @@ export async function POST(request) {
       port: process.env.SMTP_PORT || 465,
       secure: true,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: process.env.SMTP_USER || "info@lumasofts.com",
+        pass: process.env.SMTP_PASS || "pak12345!@#$%",
       },
     });
 
@@ -55,7 +55,7 @@ export async function POST(request) {
 
     // Send Welcome Email
     await transporter.sendMail({
-      from: `"Luma Softs" <${process.env.SMTP_USER}>`,
+      from: `"Luma Softs" <${process.env.SMTP_USER || "info@lumasofts.com"}>`,
       to: email,
       subject: "Your 10% Discount inside! Welcome to Luma Softs 🚀",
       html: html,
