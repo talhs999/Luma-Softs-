@@ -32,19 +32,34 @@ const Preloader = () => {
     >
       
       {/* NEW LOADING ANIMATION */}
-      <div className="loading-text">LOADING</div>
+      <div className="loading-text" style={{ textAlign: "center" }}>
+        Welcome To <br className="mobile-break" /> Luma Softs
+      </div>
 
       <style>{`
         .loading-text {
-          font-size: 2.5rem;
+          font-size: clamp(1.5rem, 5vw, 3rem);
           font-weight: 800;
-          letter-spacing: 0.3em;
+          letter-spacing: 0.1em;
           background: linear-gradient(90deg, var(--primary), #00ffcc, #ff00cc, var(--primary));
           background-size: 300% 100%;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
           animation: flowColor 2.5s linear infinite;
+        }
+
+        .mobile-break {
+          display: none;
+        }
+
+        @media (max-width: 768px) {
+          .mobile-break {
+            display: block;
+          }
+          .loading-text {
+            line-height: 1.4;
+          }
         }
 
         @keyframes flowColor {
