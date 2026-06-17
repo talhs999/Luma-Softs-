@@ -36,6 +36,10 @@ export const metadata = {
 };
 
 import Chatbot from "../components/Chatbot";
+import PromoPopup from "../components/PromoPopup";
+
+// Toggle this to false if you want to temporarily disable the promotional email system popup
+const ENABLE_PROMO_SYSTEM = true;
 
 export default function RootLayout({ children }) {
   return (
@@ -49,6 +53,7 @@ export default function RootLayout({ children }) {
         <BookingWidget />
         <Footer />
         <Chatbot />
+        {ENABLE_PROMO_SYSTEM && <PromoPopup />}
       </body>
     </html>
   );
