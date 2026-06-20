@@ -10,7 +10,10 @@ The response MUST be a pure JSON object with the following keys:
 - slug: URL friendly slug (e.g., why-ecommerce-is-booming-in-pakistan).
 - category: One of: Web Development, SEO, Digital Marketing, AI & Technology, Business Growth.
 - description: A short 2-3 sentence meta description.
-- content: The full markdown content of the blog post (at least 400 words). Make sure to use proper markdown headings (##), bullet points, and highlight Luma Softs as the best solution at the end. Use a mix of professional English and very natural Roman Urdu phrases where appropriate for the local audience to build trust.
+- content: The full markdown content of the blog post (at least 500 words). Make sure to use proper markdown headings (##).
+CRITICAL: You MUST include at least one placeholder image using Markdown syntax, e.g., ![Image](/Services Images/Web development.png) or ![Image](/Services Images/Digital Marketing.png). 
+CRITICAL: You MUST include internal backlinks to our services using Markdown links. For example, link the phrase "Web Development" to \`/services/web-development\`, "Digital Marketing" to \`/services/digital-marketing\`, or "Contact Us" to \`/contact\`. End the blog with a call to action containing a backlink to \`/contact\`.
+Use a mix of professional English and very natural Roman Urdu phrases where appropriate for the local audience to build trust.
 
 Do NOT wrap the JSON in markdown code blocks like \`\`\`json. Return ONLY raw valid JSON.`;
 

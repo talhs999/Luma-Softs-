@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 import { query } from "../../../lib/db";
-
-// Revalidate 0 ensures we always fetch the latest from the database
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";// Revalidate 0 ensures we always fetch the latest from the database
 export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
@@ -44,26 +44,9 @@ export default async function BlogDetailPage({ params }) {
     );
   }
 
-  // Simple Markdown-like renderer for content
-  const renderContent = (content) => {
-    if (!content) return null;
-    return content.split("\n").map((line, index) => {
-      const trimmed = line.trim();
-      if (trimmed.startsWith("## ")) {
-        return <h2 key={index} style={{ fontSize: "1.75rem", fontWeight: 700, color: "var(--fg)", marginTop: "2rem", marginBottom: "1rem" }}>{trimmed.replace("## ", "")}</h2>;
-      }
-      if (trimmed.startsWith("**") && trimmed.includes(":**")) {
-         const parts = trimmed.split("**");
-         return <p key={index} style={{ color: "var(--gray)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1rem" }}>
-            <strong>{parts[1]}</strong>{parts[2]}
-         </p>
-      }
-      if (trimmed) {
-        return <p key={index} style={{ color: "var(--gray)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1rem" }}>{trimmed}</p>;
-      }
-      return null;
-    });
-  };
+  // We will render content using react-markdown in the JSX below
+  // We need to import ReactMarkdown at the top. Let's assume it's imported.
+  // Actually, wait, since we are doing a replace, I must import it at the top of the file as well.
 
   return (
     <section style={{ padding: "6rem 0 8rem" }}>
@@ -92,8 +75,34 @@ export default async function BlogDetailPage({ params }) {
         <div style={{ width: "100%", height: "1px", background: "var(--border)", marginBottom: "3rem" }} />
 
         {/* Content */}
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {renderContent(blog.content)}
+        <div className="blog-content" style={{ display: "flex", flexDirection: "column" }}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h2: ({node, ...props}) => <h2 style={{ fontSize: "1.75rem", fontWeight: 700, color: "var(--fg)", marginTop: "2rem", marginBottom: "1rem" }} {...props} />,
+              h3: ({node, ...props}) => <h3 style={{ fontSize: "1.25rem", fontWeight: 600, color: "var(--fg)", marginTop: "1.5rem", marginBottom: "0.75rem" }} {...props} />,
+              p: ({node, ...props}) => <p style={{ color: "var(--gray)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1rem" }} {...props} />,
+              a: ({node, href, children, ...props}) => {
+                const isInternal = href && (href.startsWith('/') || href.includes('lumasofts.com'));
+                if (isInternal) {
+                  return <Link href={href.replace('https://lumasofts.com', '')} style={{ color: "var(--primary)", textDecoration: "none", fontWeight: 500 }} className="hover-primary" {...props}>{children}</Link>;
+                }
+                return <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "var(--primary)", textDecoration: "none", fontWeight: 500 }} className="hover-primary" {...props}>{children}</a>;
+              },
+              img: ({node, ...props}) => (
+                <span style={{ display: "block", margin: "2rem 0", borderRadius: "12px", overflow: "hidden", border: "1px solid var(--border)" }}>
+                  <img style={{ width: "100%", height: "auto", display: "block" }} {...props} alt={props.alt || "Blog Image"} />
+                </span>
+              ),
+              ul: ({node, ...props}) => <ul style={{ color: "var(--gray)", fontSize: "1rem", lineHeight: 1.8, marginBottom: "1rem", paddingLeft: "1.5rem" }} {...props} />,
+              li: ({node, ...props}) => <li style={{ marginBottom: "0.5rem" }} {...props} />,
+              blockquote: ({node, ...props}) => (
+                <blockquote style={{ borderLeft: "4px solid var(--primary)", paddingLeft: "1rem", fontStyle: "italic", color: "var(--gray)", margin: "1.5rem 0", background: "rgba(194,255,5,0.05)", padding: "1rem" }} {...props} />
+              )
+            }}
+          >
+            {blog.content}
+          </ReactMarkdown>
         </div>
       </div>
     </section>

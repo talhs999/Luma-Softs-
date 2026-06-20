@@ -122,7 +122,7 @@ export default function AdminBlogsPage() {
         <div style={{ display: "flex", alignItems: "center", gap: "1rem", background: "var(--bg-light)", padding: "1rem 1.5rem", borderRadius: 12, border: "1px solid var(--border)" }}>
           <div>
             <div style={{ fontWeight: 600, fontSize: "0.875rem", marginBottom: "0.25rem" }}>Auto-Blog System</div>
-            <div style={{ fontSize: "0.75rem", color: "var(--gray)" }}>Generates blogs every 10 days</div>
+            <div style={{ fontSize: "0.75rem", color: "var(--gray)" }}>Generates 10 blogs per month (approx. every 3 days)</div>
           </div>
           <button 
             onClick={toggleAutoBlog} 
