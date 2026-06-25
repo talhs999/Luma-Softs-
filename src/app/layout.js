@@ -20,19 +20,17 @@ const marcellus = Marcellus({
 
 export const metadata = {
   title: "Web Development Company in Karachi | Luma Softs",
-  description:
-    "Luma Softs is a leading software agency in Karachi offering Web Development, AI Automation, SEO & Digital Marketing. Get a free consultation today.",
+  description: "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",
   keywords: "Luma Softs, Software Agency, Web Development, AI Solutions, Digital Marketing, eCommerce, Mobile Apps, UI/UX Design, Karachi, Pakistan",
   openGraph: {
     title: "Web Development Company in Karachi | Luma Softs",
-    description:
-      "Luma Softs is a leading software agency in Karachi offering Web Development, AI Automation, SEO & Digital Marketing. Get a free consultation today.",
-    url: "https://lumasofts.com",
+    description: "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",
+    url: "https://www.lumasofts.com",
     siteName: "Luma Softs",
     type: "website",
     locale: "en_PK",
     images: [{
-      url: "https://lumasofts.com/og-image.jpg",
+      url: "https://www.lumasofts.com/og-image.jpg",
       width: 1200,
       height: 630,
       alt: "Luma Softs — Web Dev Agency Karachi"
@@ -40,7 +38,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    images: ["https://lumasofts.com/og-image.jpg"]
+    title: "Web Development Company in Karachi | Luma Softs",
+    description: "Professional Web Development, SEO, UI/UX & Software Solutions.",
+    images: ["https://www.lumasofts.com/og-image.jpg"]
   },
   verification: {
     google: "gW3ieRAMY6HWdimuZADxTWs2lgqF48ySA5cxfFcogmU",
