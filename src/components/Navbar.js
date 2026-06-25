@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const NAV_LINKS = [
@@ -55,14 +56,16 @@ const Navbar = () => {
         >
           {/* Logo */}
           <Link href="/" style={{ display: "flex", alignItems: "center" }}>
-            <img 
+            <Image 
               src="/logo.png" 
               alt="Luma Softs Logo" 
+              width={140}
+              height={56}
+              priority
               style={{ 
                 height: "56px", 
                 width: "auto", 
-                objectFit: "contain",
-                marginLeft: "-24px"
+                objectFit: "contain"
               }} 
             />
           </Link>

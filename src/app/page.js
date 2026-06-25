@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 import { FAQS } from "./faq/page";
@@ -137,7 +138,13 @@ export default function Home() {
       <section style={{ position: "relative", minHeight: "100vh", display: "flex", alignItems: "center", marginTop: "-72px", paddingTop: "72px", overflow: "hidden" }}>
 
         <div style={{ position: "absolute", inset: 0, zIndex: -2 }}>
-          <img src="/hero-bg.png" alt="Luma Softs Team" style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.1 }} />
+          <Image 
+            src="/hero-bg.png" 
+            alt="Luma Softs Team" 
+            fill
+            priority
+            style={{ objectFit: "cover", opacity: 0.1 }} 
+          />
         </div>
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent, #050505)", zIndex: -1 }} />
 
@@ -154,10 +161,13 @@ export default function Home() {
           <div style={{ maxWidth: 780 }}>
             <motion.div variants={fadeUp} className="section-label">Powering Ideas Into Innovation</motion.div>
             <motion.h1 variants={fadeUp} style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", marginBottom: "1.5rem" }}>
-              Building Powerful Digital <span style={{ color: "var(--primary)" }}>Solutions</span> For Modern Businesses
+              Top Web Development Company in <span style={{ color: "var(--primary)" }}>Karachi</span>, Pakistan
             </motion.h1>
+            <motion.h2 variants={fadeUp} style={{ fontSize: "1.5rem", fontWeight: 600, color: "var(--fg)", marginBottom: "1rem" }}>
+              Building Powerful Digital Solutions For Modern Businesses
+            </motion.h2>
             <motion.p variants={fadeUp} style={{ fontSize: "1.125rem", color: "var(--gray)", lineHeight: 1.7, maxWidth: 600, marginBottom: "2.5rem" }}>
-              From websites and mobile apps to AI automation and digital marketing, Luma Softs helps businesses scale faster with technology that works.
+              Luma Softs — Karachi's leading software agency — helps businesses across Pakistan scale faster with technology. From websites and mobile apps to AI automation and digital marketing, we deliver solutions that work.
             </motion.p>
             <motion.div variants={fadeUp} style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
               <Link href="/contact" className="btn-primary">Get Started</Link>

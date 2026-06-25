@@ -4,8 +4,8 @@ import { ArrowRight } from "lucide-react";
 import { query } from "../../lib/db";
 
 export const metadata = {
-  title: "Blogs & Insights | Luma Softs",
-  description: "Read the latest insights on software development, AI, UI/UX design, and digital marketing from Luma Softs experts.",
+  title: "Tech Blog — SEO & AI Tips for Pakistan | Luma Softs",
+  description: "Read the latest insights on software development, AI, UI/UX design, and digital marketing from Luma Softs experts in Pakistan.",
 };
 
 export const revalidate = 0; // Ensures it fetches fresh blogs on every load

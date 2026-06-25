@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { Plus, Minus, HelpCircle } from "lucide-react";
 
 export const FAQS = [
@@ -15,7 +16,7 @@ export const FAQS = [
   {
     category: "Pricing & Timelines",
     questions: [
-      { q: "How much does a project cost?", a: "Pricing varies depending on the scope, features, and complexity of the project. A simple corporate website costs significantly less than a custom SaaS application. We provide transparent, itemized quotes after our initial discussion." },
+      { q: "How much does a website cost in Karachi?", a: "Pricing varies depending on the requirements. A standard business website in Karachi costs between Rs. 25,000 to Rs. 80,000. Custom eCommerce stores and complex web apps range from Rs. 150,000 to Rs. 500,000+. At Luma Softs, packages start from Rs. 25,000." },
       { q: "What is your typical payment structure?", a: "Generally, we work on a milestone basis: 50% upfront to commence work, 25% after design approval, and the final 25% upon project completion and deployment." },
       { q: "How long does it take to build a website?", a: "A standard corporate website takes 2-4 weeks. More complex eCommerce stores or custom web applications can take 6-12 weeks depending on the features." }
     ]
@@ -38,8 +39,23 @@ export default function FAQPage() {
   };
 
   return (
-    <section style={{ padding: "4rem 0 6rem", minHeight: "80vh" }}>
-      <div className="section-container" style={{ maxWidth: 800 }}>
+    <>
+      <Script id="faq-schema" type="application/ld+json" strategy="afterInteractive">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [{
+            "@type": "Question",
+            "name": "How much does a website cost in Karachi?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Rs. 25,000 to Rs. 500,000+. Luma Softs packages start from Rs. 25,000."
+            }
+          }]
+        })}
+      </Script>
+      <section style={{ padding: "4rem 0 6rem", minHeight: "80vh" }}>
+        <div className="section-container" style={{ maxWidth: 800 }}>
         
         <div style={{ textAlign: "center", marginBottom: "4rem" }}>
           <div style={{ display: "flex", justifyContent: "center", marginBottom: "1rem" }}>

@@ -19,17 +19,28 @@ const marcellus = Marcellus({
 });
 
 export const metadata = {
-  title: "Luma Softs | Powering Ideas Into Innovation",
+  title: "Web Development Company in Karachi | Luma Softs",
   description:
-    "Luma Softs builds high-performance websites, enterprise software, AI solutions, eCommerce platforms, and digital marketing experiences. Top software agency for business growth.",
-  keywords: "Luma Softs, Software Agency, Web Development, AI Solutions, Digital Marketing, eCommerce, Mobile Apps, UI/UX Design",
+    "Luma Softs is a leading software agency in Karachi offering Web Development, AI Automation, SEO & Digital Marketing. Get a free consultation today.",
+  keywords: "Luma Softs, Software Agency, Web Development, AI Solutions, Digital Marketing, eCommerce, Mobile Apps, UI/UX Design, Karachi, Pakistan",
   openGraph: {
-    title: "Luma Softs | Powering Ideas Into Innovation",
+    title: "Web Development Company in Karachi | Luma Softs",
     description:
-      "Premium Web Development, AI Automation, Graphic Design, and Digital Marketing Services by Luma Softs.",
+      "Luma Softs is a leading software agency in Karachi offering Web Development, AI Automation, SEO & Digital Marketing. Get a free consultation today.",
     url: "https://lumasofts.com",
     siteName: "Luma Softs",
     type: "website",
+    locale: "en_PK",
+    images: [{
+      url: "https://lumasofts.com/og-image.jpg",
+      width: 1200,
+      height: 630,
+      alt: "Luma Softs — Web Dev Agency Karachi"
+    }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["https://lumasofts.com/og-image.jpg"]
   },
   verification: {
     google: "gW3ieRAMY6HWdimuZADxTWs2lgqF48ySA5cxfFcogmU",
@@ -55,6 +66,18 @@ export default function RootLayout({ children }) {
             gtag('js', new Date());
             gtag('config', 'G-SBQ82T59CJ');
           `}
+        </Script>
+
+        {/* JSON-LD Schema Markup */}
+        <Script id="json-ld-schema" type="application/ld+json" strategy="afterInteractive">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Luma Softs",
+            "address": { "addressLocality": "Karachi", "addressCountry": "PK" },
+            "serviceType": ["Web Development", "AI Automation", "SEO"],
+            "telephone": "+92-313-666-1921"
+          })}
         </Script>
 
         <Preloader />
