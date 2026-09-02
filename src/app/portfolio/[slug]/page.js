@@ -59,10 +59,6 @@ export default function PortfolioDetailPage() {
   const [related, setRelated] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (slug) fetchData();
-  }, [slug]);
-
   async function fetchData() {
     setLoading(true);
     try {
@@ -77,7 +73,13 @@ export default function PortfolioDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    if (slug) {
+      setTimeout(() => fetchData(), 0);
+    }
+  }, [slug]);
 
   if (loading) {
     return (

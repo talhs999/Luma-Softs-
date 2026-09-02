@@ -14,7 +14,7 @@ export default function BookingWidget() {
 
   useEffect(() => {
     // Show only if NOT on Home (/) and NOT on Admin (/admin...)
-    if (pathname !== "/" && !pathname.startsWith("/admin")) {
+    if (pathname && pathname !== "/" && !pathname.startsWith("/admin")) {
       setTimeout(() => setShowButton(true), 0);
     } else {
       setTimeout(() => setShowButton(false), 0);

@@ -74,9 +74,17 @@ export default function RootLayout({ children }) {
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
             "name": "Luma Softs",
-            "address": { "addressLocality": "Karachi", "addressCountry": "PK" },
+            "url": "https://lumasofts.com",
+            "image": "https://www.lumasofts.com/og-image.jpg",
+            "description": "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",
+            "address": { 
+              "@type": "PostalAddress",
+              "addressLocality": "Karachi", 
+              "addressCountry": "PK" 
+            },
             "serviceType": ["Web Development", "AI Automation", "SEO"],
-            "telephone": "+92-313-666-1921"
+            "telephone": "+92-313-666-1921",
+            "priceRange": "$$"
           })}
         </Script>
 

@@ -22,10 +22,6 @@ export default function TeamSection() {
   const [loading, setLoading] = useState(true);
   const [selectedMember, setSelectedMember] = useState(null);
 
-  useEffect(() => {
-    fetchTeam();
-  }, []);
-
   async function fetchTeam() {
     try {
       const res = await fetch("/api/admin/team");
@@ -38,7 +34,11 @@ export default function TeamSection() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    setTimeout(() => fetchTeam(), 0);
+  }, []);
 
   return (
     <>

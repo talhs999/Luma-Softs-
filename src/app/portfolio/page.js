@@ -32,10 +32,6 @@ export default function PortfolioPage() {
   const [portfolio, setPortfolio] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchPortfolio();
-  }, []);
-
   async function fetchPortfolio() {
     setLoading(true);
     try {
@@ -49,7 +45,11 @@ export default function PortfolioPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  useEffect(() => {
+    setTimeout(() => fetchPortfolio(), 0);
+  }, []);
 
   const filtered = activeCategory === "All" ? portfolio : portfolio.filter((p) => p.category === activeCategory);
 

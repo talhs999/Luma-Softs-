@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const QUICK_LINKS = [
   { href: "/about", label: "About Us" },
@@ -36,7 +37,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <Link href="/" style={{ display: "inline-flex", marginBottom: "1rem" }}>
-              <img src="/logo.png" alt="Luma Softs Logo" style={{ height: "64px", width: "auto", objectFit: "contain", marginLeft: "-40px" }} />
+              <Image src="/logo.png" alt="Luma Softs Logo" width={200} height={64} style={{ height: "64px", width: "auto", objectFit: "contain", marginLeft: "-40px" }} />
             </Link>
             <p style={{ color: "var(--gray)", fontSize: "0.9375rem", lineHeight: 1.7, maxWidth: 280, marginBottom: "1.5rem" }}>
               Powering Ideas Into Innovation. We build websites, software, AI solutions, and digital experiences.

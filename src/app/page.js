@@ -432,7 +432,7 @@ export default function Home() {
       >
         <div className="section-container" style={{ position: "relative", minHeight: "500px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
           {AVATARS.map((av, i) => (
-            <img key={i} src={av.img} alt="Team Member" className={av.hideOnMobile ? "avatar-mobile-hide" : ""} style={{
+            <Image key={i} src={av.img} alt="Team Member" width={av.size} height={av.size} className={av.hideOnMobile ? "avatar-mobile-hide" : ""} style={{
               position: "absolute", top: av.top, left: av.left, width: av.size, height: av.size, borderRadius: "50%", objectFit: "cover",
               boxShadow: "0 10px 30px rgba(0,0,0,0.5), 0 0 0 2px rgba(194,255,5,0.2)",
               animation: `float ${3 + i % 3}s ease-in-out infinite alternate`, zIndex: 0
