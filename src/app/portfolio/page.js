@@ -36,7 +36,7 @@ export default function PortfolioPage() {
     fetchPortfolio();
   }, []);
 
-  const fetchPortfolio = async () => {
+  async function fetchPortfolio() {
     setLoading(true);
     try {
       const res = await fetch("/api/portfolio");

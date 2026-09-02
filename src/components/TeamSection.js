@@ -26,7 +26,7 @@ export default function TeamSection() {
     fetchTeam();
   }, []);
 
-  const fetchTeam = async () => {
+  async function fetchTeam() {
     try {
       const res = await fetch("/api/admin/team");
       if (res.ok) {

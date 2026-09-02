@@ -30,7 +30,7 @@ export default function AdminPortfolioPage() {
     fetchProjects();
   }, []);
 
-  const fetchProjects = async () => {
+  async function fetchProjects() {
     setLoading(true);
     try {
       const res = await fetch("/api/admin/portfolio");

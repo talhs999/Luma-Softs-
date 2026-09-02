@@ -127,7 +127,7 @@ export default function PromoPopup() {
                 <div style={{ width: 60, height: 60, borderRadius: "50%", background: "rgba(194,255,5,0.1)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--primary)" }}>
                   <CheckCircle size={32} />
                 </div>
-                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff" }}>You're In!</h3>
+                <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#fff" }}>You&apos;re In!</h3>
                 <p style={{ color: "var(--gray)", lineHeight: 1.5 }}>{message}</p>
               </motion.div>
             ) : (

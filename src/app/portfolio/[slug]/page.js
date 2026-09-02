@@ -63,7 +63,7 @@ export default function PortfolioDetailPage() {
     if (slug) fetchData();
   }, [slug]);
 
-  const fetchData = async () => {
+  async function fetchData() {
     setLoading(true);
     try {
       const res = await fetch(`/api/portfolio/${slug}`);

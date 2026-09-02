@@ -15,9 +15,9 @@ export default function BookingWidget() {
   useEffect(() => {
     // Show only if NOT on Home (/) and NOT on Admin (/admin...)
     if (pathname !== "/" && !pathname.startsWith("/admin")) {
-      setShowButton(true);
+      setTimeout(() => setShowButton(true), 0);
     } else {
-      setShowButton(false);
+      setTimeout(() => setShowButton(false), 0);
     }
   }, [pathname]);
 
@@ -204,7 +204,7 @@ export default function BookingWidget() {
                 {step === 2 && (
                   <motion.form initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} onSubmit={handleSubmit}>
                     <p style={{ color: "var(--gray)", marginBottom: "20px", fontSize: "0.9375rem" }}>
-                      You've selected <strong>{new Date(formData.date).toLocaleDateString()}</strong> at <strong>{formData.time}</strong>. Please provide your details.
+                      You&apos;ve selected <strong>{new Date(formData.date).toLocaleDateString()}</strong> at <strong>{formData.time}</strong>. Please provide your details.
                     </p>
                     
                     <div style={{ marginBottom: "15px" }}>

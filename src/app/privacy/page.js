@@ -22,7 +22,7 @@ export default function PrivacyPolicyPage() {
           <div>
             <h2 style={{ fontSize: "1.5rem", fontWeight: 600, color: "var(--primary)", marginBottom: "1rem" }}>1. Information We Collect</h2>
             <p style={{ color: "var(--gray)" }}>
-              Luma Softs ("we," "our," or "us") is committed to protecting your privacy. We collect information you provide directly to us, such as when you request a quote, fill out a contact form, or communicate with us. This may include your name, email address, phone number, and business details.
+              Luma Softs (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;) is committed to protecting your privacy. We collect information you provide directly to us, such as when you request a quote, fill out a contact form, or communicate with us. This may include your name, email address, phone number, and business details.
             </p>
           </div>
           
