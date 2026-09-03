@@ -45,7 +45,7 @@ jobs:
     - name: 🔄 Trigger cPanel Server Restart
       run: |
         mkdir -p ftp-restart
-        touch ftp-restart/restart.txt
+        date > ftp-restart/restart.txt
         
     - name: 🚀 Upload Restart Trigger
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4

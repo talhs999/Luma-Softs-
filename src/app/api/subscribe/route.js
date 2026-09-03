@@ -25,12 +25,12 @@ export async function POST(request) {
     
     // Set up Nodemailer transporter
     const transporter = nodemailer.createTransport({
-      host: "mail.lumasofts.com",
-      port: 465,
-      secure: true,
+      host: process.env.SMTP_HOST || "mail.lumasofts.com",
+      port: Number(process.env.SMTP_PORT) || 587,
+      secure: Number(process.env.SMTP_PORT) === 465,
       auth: {
-        user: "info@lumasofts.com",
-        pass: "pak12345!@#$%",
+        user: process.env.SMTP_USER || "info@lumasofts.com",
+        pass: process.env.SMTP_PASS || "pak12345!@#$%",
       },
       tls: {
         // Do not fail on invalid certs internally in cPanel
