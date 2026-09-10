@@ -99,7 +99,7 @@ a { color: inherit; text-decoration: none; }
   background-clip: text;
 }
 
-.btn-primary {
+.btn-primary, .btn-modern {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -115,13 +115,14 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.3s ease;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-modern:hover {
   filter: brightness(1.1);
   box-shadow: 0 0 24px var(--primary-glow);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  color: #000;
 }
 
-.btn-outline {
+.btn-outline, .btn-modern-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -137,10 +138,11 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.3s ease;
 }
 
-.btn-outline:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--border-hover);
-  transform: translateY(-1px);
+.btn-outline:hover, .btn-modern-outline:hover {
+  background: rgba(194, 255, 5, 0.08);
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
 }
 
 .section-label {

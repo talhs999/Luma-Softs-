@@ -4,13 +4,13 @@ import TeamSection from "../../components/TeamSection";
 
 export const metadata = {
   title: "About Us | Luma Softs",
-  description: "Learn about Luma Softs — our mission, vision, values, and the team behind our digital solutions.",
+  description: "Learn about Luma Softs: our mission, vision, values, and the team behind our digital solutions.",
 };
 
 const VALUES = [
   { icon: Target, title: "Innovation", desc: "We continuously push the boundaries of what's possible with technology." },
   { icon: Handshake, title: "Integrity", desc: "Honest communication and transparent processes in every engagement." },
-  { icon: Star, title: "Excellence", desc: "We never settle for good enough — every detail matters." },
+  { icon: Star, title: "Excellence", desc: "We never settle for good enough; every detail matters." },
   { icon: Globe2, title: "Impact", desc: "Building solutions that create real, measurable value for our clients." },
 ];
 
@@ -22,7 +22,7 @@ export default function AboutPage() {
           <div className="section-label" style={{ justifyContent: "center" }}>The Vision Behind Luma Softs</div>
           <h1 className="section-title">Powering Ideas Into <span style={{ color: "var(--primary)" }}>Innovation</span></h1>
           <p className="section-subtitle" style={{ margin: "1.5rem auto 1.5rem", color: "var(--gray)", lineHeight: 1.8, fontSize: "1rem" }}>
-            Luma Softs stands as a beacon of creativity and innovation in the ever-evolving digital landscape. We are more than just a technology agency — we are a team of dreamers, builders, and problem-solvers who turn ambitious ideas into impactful digital realities. Specializing in web design, development, software solutions, WordPress, mobile apps, graphic design, and digital marketing, Luma Softs empowers businesses to thrive in a competitive online world.
+            Luma Softs stands as a beacon of creativity and innovation in the ever-evolving digital landscape. We are more than just a technology agency: we are a team of dreamers, builders, and problem-solvers who turn ambitious ideas into impactful digital realities. Specializing in web design, development, software solutions, WordPress, mobile apps, graphic design, and digital marketing, Luma Softs empowers businesses to thrive in a competitive online world.
           </p>
           <p className="section-subtitle" style={{ margin: "0 auto", color: "var(--gray)", lineHeight: 1.8, fontSize: "1rem" }}>
             Founded by the visionary duo Talha Khan and Mustufa Ali, Luma Softs was built on a foundation of passion, integrity, and an unwavering commitment to excellence. As the journey grew, Arhum Noman joined the mission, bringing fresh perspectives and energy that pushed the company to greater heights. Together, this powerhouse team continues to redefine digital possibilities and craft success stories for brands worldwide.

@@ -27,7 +27,7 @@ export const ALL_SERVICES = [
     features: ["WooCommerce Stores", "Shopify Development", "Custom eCommerce", "Payment Integration", "Inventory Management"],
     benefits: ["Higher Conversion Rates", "Secure Payments", "Easy Product Management", "Mobile Shopping", "Analytics Dashboard"],
     faq: [
-      { q: "Which platform do you recommend?", a: "It depends on your needs — Shopify for simplicity, WooCommerce for flexibility, or custom for full control." },
+      { q: "Which platform do you recommend?", a: "It depends on your needs: Shopify for simplicity, WooCommerce for flexibility, or custom code for full control." },
       { q: "Can you integrate payment gateways?", a: "Yes, we integrate Stripe, PayPal, JazzCash, EasyPaisa, and more." },
     ],
   },
@@ -98,7 +98,7 @@ export const ALL_SERVICES = [
     benefits: ["Professional Branding", "Consistent Identity", "Higher Engagement", "Print & Digital Ready", "Quick Turnaround"],
     faq: [
       { q: "How many logo concepts do you provide?", a: "We typically provide 3-5 initial concepts with unlimited revisions on the selected design." },
-      { q: "Can you create a full brand identity?", a: "Yes — logos, color palettes, typography, brand guidelines, stationery, and social media kits." },
+      { q: "Can you create a full brand identity?", a: "Yes: logos, color palettes, typography, brand guidelines, stationery, and social media kits." },
     ],
   },
   {

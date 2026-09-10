@@ -20,6 +20,31 @@ const nextConfig = {
         destination: 'https://lumasofts.com/:path*',
         permanent: true,
       },
+      {
+        source: '/service/:slug',
+        destination: '/services/:slug',
+        permanent: true,
+      },
+      {
+        source: '/contact-us',
+        destination: '/contact',
+        permanent: true,
+      },
+      {
+        source: '/about-us',
+        destination: '/about',
+        permanent: true,
+      },
+      {
+        source: '/blog',
+        destination: '/blogs',
+        permanent: true,
+      },
+      {
+        source: '/our-services',
+        destination: '/services',
+        permanent: true,
+      },
     ];
   },
   async headers() {

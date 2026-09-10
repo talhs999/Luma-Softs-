@@ -55,7 +55,7 @@ const Navbar = () => {
           }}
         >
           {/* Logo */}
-          <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+          <Link href="/" style={{ display: "flex", alignItems: "center", marginLeft: "-16px" }}>
             <Image 
               src="/logo.png" 
               alt="Luma Softs Logo" 
@@ -63,7 +63,7 @@ const Navbar = () => {
               height={56}
               priority
               style={{ 
-                height: "56px", 
+                height: "54px", 
                 width: "auto", 
                 objectFit: "contain"
               }} 
@@ -106,18 +106,12 @@ const Navbar = () => {
           <div className="desktop-only" style={{ alignItems: "center" }}>
             <Link 
               href="/contact" 
+              className="btn-primary"
               style={{ 
-                background: "var(--fg)", 
-                color: "var(--bg)", 
-                padding: "0.75rem 1.5rem", 
-                borderRadius: "9999px",
-                fontSize: "0.9375rem",
-                fontWeight: 600,
-                transition: "all 0.2s",
-                boxShadow: "0 4px 14px rgba(255,255,255,0.25)"
+                padding: "0.625rem 1.5rem", 
+                fontSize: "0.875rem",
+                textDecoration: "none"
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.background = "var(--primary)"; e.currentTarget.style.boxShadow = "0 4px 20px rgba(194,255,5,0.4)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.background = "var(--fg)"; e.currentTarget.style.boxShadow = "0 4px 14px rgba(255,255,255,0.25)"; }}
             >
               Get Started
             </Link>

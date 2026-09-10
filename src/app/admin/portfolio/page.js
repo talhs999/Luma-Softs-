@@ -18,7 +18,7 @@ export default function AdminPortfolioPage() {
   const [form, setForm] = useState({
     title: "", slug: "", category: "Web Development", featured_image: "",
     client: "", duration: "", technologies: "", description: "", challenge: "",
-    solution: "", results: "", testimonial: "", live_url: ""
+    solution: "", results: "", testimonial: "", live_url: "", show_on_home: false
   });
 
   const categories = [
@@ -45,13 +45,27 @@ export default function AdminPortfolioPage() {
     }
   };
 
+  const toggleHomeFeatured = async (project) => {
+    const newStatus = !project.show_on_home;
+    setProjects(prev => prev.map(p => p.id === project.id ? { ...p, show_on_home: newStatus } : p));
+    try {
+      await fetch("/api/admin/portfolio", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: project.id, show_on_home: newStatus })
+      });
+    } catch (err) {
+      console.error("Failed to toggle home status:", err);
+    }
+  };
+
   const openAddModal = () => {
     setIsEditing(false);
     setCurrentId(null);
     setForm({
       title: "", slug: "", category: "Web Development", featured_image: "",
       client: "", duration: "", technologies: "", description: "", challenge: "",
-      solution: "", results: "", testimonial: "", live_url: ""
+      solution: "", results: "", testimonial: "", live_url: "", show_on_home: false
     });
     setIsModalOpen(true);
   };
@@ -72,7 +86,8 @@ export default function AdminPortfolioPage() {
       solution: project.solution || "",
       results: project.results || "",
       testimonial: project.testimonial || "",
-      live_url: project.live_url || ""
+      live_url: project.live_url || "",
+      show_on_home: !!project.show_on_home
     });
     setIsModalOpen(true);
   };
@@ -114,7 +129,10 @@ export default function AdminPortfolioPage() {
       const projectData = {
         ...form,
         slug: form.slug || generateSlug(form.title),
-        technologies: form.technologies.split(",").map(t => t.trim()).filter(Boolean)
+        technologies: typeof form.technologies === "string" 
+          ? form.technologies.split(",").map(t => t.trim()).filter(Boolean)
+          : form.technologies,
+        show_on_home: form.show_on_home ? 1 : 0
       };
 
       const method = isEditing ? "PUT" : "POST";
@@ -156,8 +174,17 @@ export default function AdminPortfolioPage() {
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-        <h1 style={{ fontWeight: 700, fontSize: "1.5rem" }}>Manage Portfolio</h1>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
+        <div>
+          <h1 style={{ fontWeight: 700, fontSize: "1.5rem", marginBottom: "0.25rem" }}>Manage Portfolio</h1>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", fontSize: "0.8125rem", color: "var(--gray)" }}>
+            <span>Total Projects: <strong style={{ color: "#fff" }}>{projects.length}</strong></span>
+            <span>•</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem", padding: "0.2rem 0.6rem", background: "rgba(194,255,5,0.1)", border: "1px solid rgba(194,255,5,0.3)", borderRadius: 9999, color: "var(--primary)", fontWeight: 600 }}>
+              ★ {projects.filter(p => p.show_on_home).length} Featured on Home
+            </span>
+          </div>
+        </div>
         <button onClick={openAddModal} className="btn-primary" style={{ padding: "0.625rem 1.25rem", fontSize: "0.875rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <Plus size={16} /> Add Project
         </button>
@@ -173,9 +200,9 @@ export default function AdminPortfolioPage() {
           No portfolio projects found. Add your first project!
         </div>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 300px), 1fr))", gap: "1.5rem" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))", gap: "1.5rem" }}>
           {projects.map((project) => (
-            <div key={project.id} className="glass" style={{ overflow: "hidden", display: "flex", flexDirection: "column" }}>
+            <div key={project.id} className="glass" style={{ overflow: "hidden", display: "flex", flexDirection: "column", border: project.show_on_home ? "1px solid rgba(194,255,5,0.35)" : "1px solid var(--border)" }}>
               <div style={{ height: "180px", background: "rgba(255,255,255,0.05)", borderBottom: "1px solid var(--border)", position: "relative" }}>
                 {project.featured_image ? (
                   <img src={project.featured_image} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -184,16 +211,41 @@ export default function AdminPortfolioPage() {
                     <ImageIcon size={48} opacity={0.5} />
                   </div>
                 )}
-                <div style={{ position: "absolute", top: "0.5rem", right: "0.5rem", background: "var(--primary)", color: "#000", fontSize: "0.625rem", fontWeight: "bold", padding: "0.25rem 0.5rem", borderRadius: "999px" }}>
+
+                {/* Home Showcase Badge */}
+                {project.show_on_home && (
+                  <div style={{ position: "absolute", top: "0.5rem", left: "0.5rem", background: "var(--primary)", color: "#000", fontSize: "0.6875rem", fontWeight: 800, padding: "0.25rem 0.6rem", borderRadius: "999px", boxShadow: "0 2px 10px rgba(0,0,0,0.5)" }}>
+                    ★ Home Showcase
+                  </div>
+                )}
+
+                <div style={{ position: "absolute", top: "0.5rem", right: "0.5rem", background: "rgba(0,0,0,0.75)", backdropFilter: "blur(6px)", border: "1px solid var(--border)", color: "#fff", fontSize: "0.6875rem", fontWeight: "bold", padding: "0.25rem 0.6rem", borderRadius: "999px" }}>
                   {project.category}
                 </div>
               </div>
               
-              <div style={{ padding: "1.5rem", flex: 1 }}>
-                <h3 style={{ fontWeight: 600, fontSize: "1.125rem", marginBottom: "0.5rem" }}>{project.title}</h3>
-                <p style={{ color: "var(--gray)", fontSize: "0.875rem", marginBottom: "1rem", lineHeight: 1.5 }}>
-                  {project.description ? project.description.substring(0, 80) + "..." : "No description."}
+              <div style={{ padding: "1.25rem", flex: 1, display: "flex", flexDirection: "column" }}>
+                <h3 style={{ fontWeight: 700, fontSize: "1.1rem", marginBottom: "0.35rem" }}>{project.title}</h3>
+                <p style={{ color: "var(--gray)", fontSize: "0.8125rem", marginBottom: "1rem", lineHeight: 1.5, flex: 1 }}>
+                  {project.description ? project.description.substring(0, 85) + "..." : "No description."}
                 </p>
+
+                {/* Checkbox to control Home Page display */}
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0.625rem 0.875rem", background: project.show_on_home ? "rgba(194,255,5,0.08)" : "rgba(255,255,255,0.03)", border: `1px solid ${project.show_on_home ? "rgba(194,255,5,0.3)" : "var(--border)"}`, borderRadius: 8, marginBottom: "0.875rem", transition: "all 0.2s" }}>
+                  <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", cursor: "pointer", fontSize: "0.8125rem", color: project.show_on_home ? "var(--primary)" : "var(--gray)", fontWeight: 600 }}>
+                    <input
+                      type="checkbox"
+                      checked={!!project.show_on_home}
+                      onChange={() => toggleHomeFeatured(project)}
+                      style={{ accentColor: "var(--primary)", width: 16, height: 16, cursor: "pointer" }}
+                    />
+                    <span>Show on Home Page</span>
+                  </label>
+                  <span style={{ fontSize: "0.6875rem", color: project.show_on_home ? "var(--primary)" : "var(--gray)" }}>
+                    {project.show_on_home ? "Active" : "Off"}
+                  </span>
+                </div>
+
                 <div style={{ display: "flex", gap: "0.5rem", marginTop: "auto" }}>
                   <button onClick={() => openEditModal(project)} style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", padding: "0.5rem", background: "rgba(255,255,255,0.05)", border: "1px solid var(--border)", borderRadius: 8, color: "var(--fg)", cursor: "pointer", fontSize: "0.8125rem", transition: "all 0.2s" }} onMouseEnter={(e) => e.currentTarget.style.background="rgba(255,255,255,0.1)"} onMouseLeave={(e) => e.currentTarget.style.background="rgba(255,255,255,0.05)"}>
                     <Edit2 size={14} /> Edit
@@ -303,6 +355,21 @@ export default function AdminPortfolioPage() {
               <div>
                 <label style={{ display: "block", fontSize: "0.875rem", color: "var(--gray)", marginBottom: "0.5rem" }}>Live URL (Optional)</label>
                 <input type="url" value={form.live_url} onChange={(e) => setForm({ ...form, live_url: e.target.value })} className="form-input" placeholder="https://" />
+              </div>
+
+              {/* Home Showcase Checkbox */}
+              <div style={{ padding: "1rem 1.25rem", background: "rgba(194,255,5,0.06)", border: "1px solid rgba(194,255,5,0.25)", borderRadius: 12, display: "flex", alignItems: "center", gap: "0.875rem" }}>
+                <input
+                  type="checkbox"
+                  id="modal_show_on_home"
+                  checked={!!form.show_on_home}
+                  onChange={(e) => setForm({ ...form, show_on_home: e.target.checked })}
+                  style={{ width: 18, height: 18, accentColor: "var(--primary)", cursor: "pointer" }}
+                />
+                <label htmlFor="modal_show_on_home" style={{ cursor: "pointer" }}>
+                  <div style={{ fontWeight: 600, color: "#ffffff", fontSize: "0.9375rem" }}>Feature in Homepage Portfolio Showcase</div>
+                  <div style={{ color: "var(--gray)", fontSize: "0.8125rem" }}>When checked, this project will appear in the portfolio cards on the main landing page.</div>
+                </label>
               </div>
 
               <div style={{ display: "flex", justifyContent: "flex-end", gap: "1rem", marginTop: "1rem" }}>

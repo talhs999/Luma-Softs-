@@ -30,6 +30,7 @@ export const ALL_PORTFOLIO = [
     testimonial: "Luma Softs completely transformed our web presence. The new site is fast, modern, and our clients love it.",
     liveUrl: "#",
     icon: <Monitor />,
+    show_on_home: true,
   },
   {
     slug: "ecommerce-fashion-store",
@@ -46,6 +47,7 @@ export const ALL_PORTFOLIO = [
     testimonial: "The store looks amazing and works flawlessly. Sales are through the roof!",
     liveUrl: "#",
     icon: <ShoppingCart />,
+    show_on_home: true,
   },
   {
     slug: "ai-customer-support-bot",
@@ -62,6 +64,7 @@ export const ALL_PORTFOLIO = [
     testimonial: "This bot handles 60% of our queries automatically. It's been a game changer for our support team.",
     liveUrl: "#",
     icon: <Bot />,
+    show_on_home: true,
   },
   {
     slug: "fintech-mobile-app",

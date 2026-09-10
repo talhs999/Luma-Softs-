@@ -11,15 +11,14 @@ const QUICK_LINKS = [
   { href: "/faq", label: "FAQ" },
 ];
 
-const SERVICES = [
-  "Web Development",
-  "Software Development",
-  "Mobile App Development",
-  "UI/UX Design",
-  "Graphic Design",
-  "Digital Marketing",
-  "AI & Automation",
-  "eCommerce Development",
+const FOOTER_SERVICES = [
+  { label: "Web Development", href: "/services/web-development" },
+  { label: "Software Development", href: "/services/software-development" },
+  { label: "Mobile App Development", href: "/services/mobile-app-development" },
+  { label: "UI/UX Design", href: "/services/ui-ux-design" },
+  { label: "Graphic Design", href: "/services/graphic-design" },
+  { label: "Digital Marketing", href: "/services/digital-marketing" },
+  { label: "eCommerce Development", href: "/services/ecommerce-development" },
 ];
 
 const Footer = () => {
@@ -77,10 +76,16 @@ const Footer = () => {
           <div>
             <h4 style={{ fontWeight: 600, marginBottom: "1rem", fontSize: "0.9375rem" }}>Services</h4>
             <div style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-              {SERVICES.slice(0, 5).map((s) => (
-                <span key={s} style={{ color: "var(--gray)", fontSize: "0.9375rem" }}>
-                  {s}
-                </span>
+              {FOOTER_SERVICES.slice(0, 5).map((s) => (
+                <Link
+                  key={s.href}
+                  href={s.href}
+                  style={{ color: "var(--gray)", fontSize: "0.9375rem", transition: "color 0.2s" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--primary)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--gray)")}
+                >
+                  {s.label}
+                </Link>
               ))}
             </div>
           </div>

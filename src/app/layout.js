@@ -19,18 +19,22 @@ const marcellus = Marcellus({
 });
 
 export const metadata = {
-  title: "Web Development Company in Karachi | Luma Softs",
-  description: "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",
-  keywords: "Luma Softs, Software Agency, Web Development, AI Solutions, Digital Marketing, eCommerce, Mobile Apps, UI/UX Design, Karachi, Pakistan",
+  metadataBase: new URL("https://lumasofts.com"),
+  alternates: {
+    canonical: "/",
+  },
+  title: "Top Web Development Company in Karachi | Luma Softs",
+  description: "Looking for top-rated web development in Karachi? Luma Softs builds custom websites, WordPress/WooCommerce stores, UI/UX, AI automation & software that scale your business.",
+  keywords: "Web Development Karachi, Software Company Karachi, Website Design Pakistan, WordPress Developers Karachi, UI/UX Design Studio, Luma Softs",
   openGraph: {
-    title: "Web Development Company in Karachi | Luma Softs",
+    title: "Top Web Development Company in Karachi | Luma Softs",
     description: "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",
-    url: "https://www.lumasofts.com",
+    url: "https://lumasofts.com",
     siteName: "Luma Softs",
     type: "website",
     locale: "en_PK",
     images: [{
-      url: "https://www.lumasofts.com/og-image.jpg",
+      url: "https://lumasofts.com/og-image.jpg",
       width: 1200,
       height: 630,
       alt: "Luma Softs — Web Dev Agency Karachi"
@@ -38,9 +42,9 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Web Development Company in Karachi | Luma Softs",
+    title: "Top Web Development Company in Karachi | Luma Softs",
     description: "Professional Web Development, SEO, UI/UX & Software Solutions.",
-    images: ["https://www.lumasofts.com/og-image.jpg"]
+    images: ["https://lumasofts.com/og-image.jpg"]
   },
   verification: {
     google: "gW3ieRAMY6HWdimuZADxTWs2lgqF48ySA5cxfFcogmU",
@@ -49,6 +53,7 @@ export const metadata = {
 
 import Chatbot from "../components/Chatbot";
 import PromoPopup from "../components/PromoPopup";
+import CookieConsent from "../components/CookieConsent";
 
 // Toggle this to false if you want to temporarily disable the promotional email system popup
 const ENABLE_PROMO_SYSTEM = true;
@@ -68,23 +73,46 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        {/* JSON-LD Schema Markup */}
+        {/* Rich LocalBusiness & Service Schema Markup */}
         <Script id="json-ld-schema" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "ProfessionalService",
-            "name": "Luma Softs",
-            "url": "https://lumasofts.com",
-            "image": "https://www.lumasofts.com/og-image.jpg",
-            "description": "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",
-            "address": { 
-              "@type": "PostalAddress",
-              "addressLocality": "Karachi", 
-              "addressCountry": "PK" 
-            },
-            "serviceType": ["Web Development", "AI Automation", "SEO"],
-            "telephone": "+92-313-666-1921",
-            "priceRange": "$$"
+            "@graph": [
+              {
+                "@type": "LocalBusiness",
+                "@id": "https://lumasofts.com/#organization",
+                "name": "Luma Softs",
+                "url": "https://lumasofts.com",
+                "logo": "https://lumasofts.com/logo.png",
+                "image": "https://lumasofts.com/og-image.jpg",
+                "description": "Top-rated web development, UI/UX design, custom software and AI automation agency in Karachi, Pakistan.",
+                "telephone": "+92-313-666-1921",
+                "email": "admin@lumasofts.com",
+                "priceRange": "$$",
+                "address": { 
+                  "@type": "PostalAddress",
+                  "addressLocality": "Karachi", 
+                  "addressRegion": "Sindh",
+                  "addressCountry": "PK" 
+                },
+                "geo": {
+                  "@type": "GeoCoordinates",
+                  "latitude": 24.8607,
+                  "longitude": 67.0011
+                },
+                "openingHoursSpecification": {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                  "opens": "09:00",
+                  "closes": "21:00"
+                },
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.9",
+                  "reviewCount": "28"
+                }
+              }
+            ]
           })}
         </Script>
 
@@ -96,6 +124,7 @@ export default function RootLayout({ children }) {
         <BookingWidget />
         <Footer />
         <Chatbot />
+        <CookieConsent />
         {ENABLE_PROMO_SYSTEM && <PromoPopup />}
       </body>
     </html>
