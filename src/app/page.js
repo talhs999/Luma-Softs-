@@ -215,6 +215,7 @@ export default function Home() {
   const [activeHeroVideo, setActiveHeroVideo] = useState(0);
   const [homeProjects, setHomeProjects] = useState([]);
   const [hoveredPortfolioSlug, setHoveredPortfolioSlug] = useState(null);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     fetchHomeProjects();
@@ -435,7 +436,34 @@ export default function Home() {
               </span>
             </motion.div>
             <motion.p variants={fadeUp} style={{ fontSize: "1.125rem", color: "var(--gray)", lineHeight: 1.75, maxWidth: 660, marginBottom: "2.75rem", fontWeight: 400 }}>
-              Top-Rated Web Development &amp; Software Company in Karachi, Pakistan. We are a worldwide digital agency crafting high-performance websites, custom applications, and scalable digital solutions for modern businesses.
+              Top-Rated Web Development &amp; Software Company in Karachi, Pakistan.
+              <span className="mobile-hidden-text"> We are a worldwide digital agency crafting high-performance websites, custom applications, and scalable digital solutions for modern businesses.</span>
+              <style>{`
+                @media (max-width: 768px) {
+                  .mobile-hidden-text { display: ${isExpanded ? "inline" : "none"}; }
+                  .mobile-read-more { display: inline-block; }
+                }
+                @media (min-width: 769px) {
+                  .mobile-hidden-text { display: inline; }
+                  .mobile-read-more { display: none; }
+                }
+              `}</style>
+              <button 
+                className="mobile-read-more"
+                onClick={() => setIsExpanded(!isExpanded)} 
+                style={{ 
+                  background: "none", 
+                  border: "none", 
+                  color: "var(--primary)", 
+                  cursor: "pointer", 
+                  padding: "0 0 0 5px", 
+                  fontSize: "1rem", 
+                  fontWeight: 600,
+                  textDecoration: "underline"
+                }}
+              >
+                {isExpanded ? "Read Less" : "Read More"}
+              </button>
             </motion.p>
             <motion.div variants={fadeUp} style={{ display: "flex", gap: "1rem", flexWrap: "wrap", alignItems: "center" }}>
               <Link href="/contact" className="btn-primary">Start a Project</Link>

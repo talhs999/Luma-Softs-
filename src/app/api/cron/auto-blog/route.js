@@ -28,10 +28,8 @@ export async function POST(request) {
 async function handleCron() {
   try {
     // 1. Check if Auto-Blog is enabled
-    const settings = await query("SELECT setting_value FROM app_settings WHERE setting_key = 'auto_blog_enabled'");
-    if (settings.length === 0 || settings[0].setting_value !== 'true') {
-      return NextResponse.json({ message: 'Auto-blog feature is currently disabled in settings.' }, { status: 200 });
-    }
+    // We removed the database check to keep this system always ON.
+    // As requested by the admin, it will run whenever the cron hits this endpoint.
 
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
     if (!apiKey) {

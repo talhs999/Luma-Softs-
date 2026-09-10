@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styles from './Chatbot.module.css';
 import { usePathname } from 'next/navigation';
 import { MessageCircle } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 const Chatbot = () => {
   const pathname = usePathname();
@@ -83,7 +84,17 @@ const Chatbot = () => {
             {messages.map((msg, idx) => (
               <div key={idx} className={`${styles.messageWrapper} ${msg.role === 'ai' ? styles.messageAi : styles.messageUser}`}>
                 <div className={styles.messageBubble}>
-                  {msg.text}
+                  {msg.role === 'ai' ? (
+                    <ReactMarkdown
+                      components={{
+                        a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" className={styles.chatLink} />
+                      }}
+                    >
+                      {msg.text}
+                    </ReactMarkdown>
+                  ) : (
+                    msg.text
+                  )}
                 </div>
               </div>
             ))}

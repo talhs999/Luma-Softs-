@@ -174,3 +174,22 @@
     right: 1rem;
   }
 }
+
+.chatLink {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--primary);
+  color: black !important;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.chatLink:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
