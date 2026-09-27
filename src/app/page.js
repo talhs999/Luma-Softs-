@@ -402,7 +402,7 @@ export default function Home() {
                 marginBottom: "1.25rem" 
               }}
             >
-              We Are <span style={{ color: "var(--primary)" }}>Luma Softs</span>
+              We Are <span style={{ color: "var(--primary)" }}>Luma Softs</span> Web Agency
             </motion.h1>
             <motion.div 
               variants={fadeUp} 
@@ -1182,6 +1182,7 @@ export default function Home() {
               {visibleTestimonials.map((t, i) => (
                 <div 
                   key={i} 
+                  aria-hidden={i >= reviews.length ? "true" : undefined}
                   onClick={() => setSelectedReview(t)} 
                   style={{ 
                     flex: "0 0 auto", 
