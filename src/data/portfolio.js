@@ -114,4 +114,21 @@ export const ALL_PORTFOLIO = [
     liveUrl: "#",
     icon: <BarChart />,
   },
+  {
+    slug: "united-strategic-solutions",
+    title: "United Strategic Solutions",
+    category: "Web Development",
+    featuredImage: "https://image.thum.io/get/width/1200/crop/800/https://unitedstrategicsolutions.com/",
+    client: "United Strategic Solutions",
+    duration: "2 Months",
+    technologies: ["Next.js", "Tailwind CSS", "Node.js"],
+    description: "A comprehensive digital marketing agency website operating across UAE, UK, and US, focusing on building marketing systems and designs for growth.",
+    challenge: "The client needed a highly professional, fast, and globally scalable platform to showcase their 360-degree digital marketing services to an international audience.",
+    solution: "Designed and developed a blazing fast, SEO-optimized web platform using Next.js and Tailwind CSS, ensuring smooth animations and a premium user experience.",
+    results: "Achieved perfect Lighthouse scores, improved global load times, and provided a highly engaging portfolio showcase for their international clients.",
+    testimonial: "Luma Softs delivered an exceptional platform. The 2-month development process was smooth, and the end result perfectly represents our global brand.",
+    liveUrl: "https://unitedstrategicsolutions.com/",
+    icon: <Monitor />,
+    show_on_home: true,
+  }
 ];
