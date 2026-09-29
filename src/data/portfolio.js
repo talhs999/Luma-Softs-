@@ -118,7 +118,7 @@ export const ALL_PORTFOLIO = [
     slug: "united-strategic-solutions",
     title: "United Strategic Solutions",
     category: "Web Development",
-    featuredImage: "https://image.thum.io/get/width/1200/crop/800/https://unitedstrategicsolutions.com/",
+    featuredImage: "/web-dev.png",
     client: "United Strategic Solutions",
     duration: "2 Months",
     technologies: ["Next.js", "Tailwind CSS", "Node.js"],

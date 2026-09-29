@@ -69,12 +69,6 @@ export async function POST(req) {
           html: adminHtml
         });
 
-        await transporter.sendMail({
-          from: `"Luma Softs" <${process.env.SMTP_USER}>`, 
-          to: email, 
-          subject: `Your meeting request with Luma Softs is received!`,
-          html: clientHtml
-        });
       } catch (emailError) {
         console.error("Email sending failed, but booking was saved:", emailError.message);
       }

@@ -9,7 +9,7 @@ async function testSMTP() {
     secure: true,
     auth: {
       user: "info@lumasofts.com",
-      pass: "pak12345!@#$%",
+      pass: "Pakkhi622711!@#$%std1234",
     },
   });
 
