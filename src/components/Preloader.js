@@ -4,169 +4,160 @@ import React, { useEffect, useState } from "react";
 const Preloader = () => {
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    // Fast fade out for the new simple loader
-    const timer = setTimeout(() => setFadeOut(true), 1500);
-    const hide = setTimeout(() => setVisible(false), 2000);
-    return () => { clearTimeout(timer); clearTimeout(hide); };
+    // Check if mobile for faster loading
+    const isMobile = window.innerWidth <= 768;
+    const duration = isMobile ? 800 : 1500; // Faster on mobile
+    
+    let start = null;
+    let animationFrameId;
+
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const percentage = Math.min(Math.floor((progress / duration) * 100), 100);
+      
+      setCount(percentage);
+
+      if (progress < duration) {
+        animationFrameId = window.requestAnimationFrame(step);
+      } else {
+        // When 100% reached
+        setTimeout(() => setFadeOut(true), 200);
+        setTimeout(() => setVisible(false), 700);
+      }
+    };
+
+    animationFrameId = window.requestAnimationFrame(step);
+
+    return () => {
+      window.cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   if (!visible) return null;
 
   return (
     <div
+      className="preloader-container"
       style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        background: "#050505",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        transition: "opacity 0.5s ease",
         opacity: fadeOut ? 0 : 1,
         pointerEvents: fadeOut ? "none" : "auto",
       }}
     >
-      
-      {/* NEW LOADING ANIMATION */}
-      <div className="loading-text" style={{ textAlign: "center" }}>
-        Welcome To <br className="mobile-break" /> Luma Softs
+      <div className="loader-content">
+        <div className="logo-wrapper">
+          <img src="/logo.png" alt="Luma Softs Logo" className="loader-logo" />
+        </div>
+        
+        <div className="counter-wrapper">
+          <span className="counter-text">{count}</span>
+          <span className="counter-percent">%</span>
+        </div>
       </div>
 
       <style>{`
-        .loading-text {
-          font-size: clamp(1.5rem, 5vw, 3rem);
-          font-weight: 800;
-          letter-spacing: 0.1em;
-          background: linear-gradient(90deg, var(--primary), #fffb00, #39ff14, var(--primary));
-          background-size: 300% 100%;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          animation: flowColor 2.5s linear infinite;
-        }
-
-        .mobile-break {
-          display: none;
-        }
-
-        @media (max-width: 768px) {
-          .mobile-break {
-            display: block;
-          }
-          .loading-text {
-            line-height: 1.4;
-          }
-        }
-
-        @keyframes flowColor {
-          0% { background-position: 0% 50%; }
-          100% { background-position: 100% 50%; }
-        }
-      `}</style>
-
-      {/* 
-        ========================================
-        OLD ANIMATION BACKUP (DO NOT DELETE)
-        ========================================
-      
-      <div className="logo-circle">
-        <img src="/logo.png" alt="Luma Softs" className="wave-logo" />
-      </div>
-
-      <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
-        <p style={{ fontWeight: 700, fontSize: "1.25rem", letterSpacing: "0.2em", color: "var(--fg)", marginBottom: "0.5rem" }}>
-          LUMA <span style={{ color: "var(--primary)" }}>SOFTS</span>
-        </p>
-        <p style={{ fontSize: "0.8125rem", color: "var(--gray)", letterSpacing: "0.05em" }}>
-          INITIALIZING SYSTEM...
-        </p>
-      </div>
-
-      <div style={{ width: 120, height: 20, overflow: "hidden", position: "relative", marginTop: "0.5rem" }}>
-        <svg width="240" height="20" className="wave-line">
-          <path 
-            d="M 0 10 Q 15 0 30 10 T 60 10 T 90 10 T 120 10 T 150 10 T 180 10 T 210 10 T 240 10" 
-            fill="none" 
-            stroke="var(--primary)" 
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-        </svg>
-      </div>
-
-      <style>{\`
-        .logo-circle {
-          width: 140px;
-          height: 140px;
-          border-radius: 50%;
-          border: 2px dashed var(--primary);
+        .preloader-container {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          background: #050505;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(194,255,5,0.03);
-          box-shadow: 0 0 30px rgba(194,255,5,0.15), inset 0 0 20px rgba(194,255,5,0.1);
-          animation: circleSpinAppear 1.5s ease-out forwards, circleRotate 10s linear infinite;
+          transition: opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1);
         }
 
-        .wave-logo {
-          width: 80px;
-          height: 80px;
-          object-fit: contain;
-          animation: logoWaveEntrance 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, counterRotate 10s linear infinite;
+        .loader-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 2rem;
         }
 
-        .wave-line {
+        .logo-wrapper {
+          position: relative;
+          width: 150px;
+          height: 150px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* Glowing ring behind logo */
+        .logo-wrapper::before {
+          content: '';
           position: absolute;
-          left: 0;
-          top: 0;
-          animation: slideWave 1.2s linear infinite;
+          inset: 0;
+          border-radius: 50%;
+          padding: 3px;
+          background: conic-gradient(from 0deg, transparent, var(--primary), transparent 30%);
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          animation: spin 1s linear infinite;
         }
 
-        @keyframes circleSpinAppear {
-          0% { transform: scale(0); opacity: 0; border-color: transparent; }
-          50% { transform: scale(1.1); opacity: 0.5; border-color: rgba(194,255,5,0.5); }
-          100% { transform: scale(1); opacity: 1; border-color: var(--primary); }
+        .loader-logo {
+          width: 90px;
+          height: auto;
+          object-fit: contain;
+          animation: pulseLogo 1.5s ease-in-out infinite alternate;
+          filter: drop-shadow(0 0 15px rgba(194, 255, 5, 0.3));
         }
 
-        @keyframes circleRotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+        .counter-wrapper {
+          display: flex;
+          align-items: flex-end;
+          line-height: 0.8;
+          overflow: hidden;
         }
 
-        @keyframes counterRotate {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(-360deg); }
+        .counter-text {
+          font-size: clamp(4rem, 10vw, 8rem);
+          font-weight: 900;
+          color: transparent;
+          -webkit-text-stroke: 2px var(--primary);
+          font-family: system-ui, -apple-system, sans-serif;
+          font-variant-numeric: tabular-nums;
         }
 
-        @keyframes logoWaveEntrance {
-          0% {
-            transform: scale(0) translate(-150px, 150px);
-            opacity: 0;
+        .counter-percent {
+          font-size: clamp(2rem, 5vw, 4rem);
+          font-weight: 900;
+          color: var(--primary);
+          margin-left: 5px;
+          margin-bottom: 5px;
+        }
+
+        @keyframes spin {
+          to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseLogo {
+          0% { transform: scale(0.95); opacity: 0.8; }
+          100% { transform: scale(1.05); opacity: 1; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+          .counter-wrapper {
+            display: none; /* Hide counter on mobile as requested */
           }
-          40% {
-            transform: scale(1.3) translate(30px, -40px);
-            opacity: 1;
+          
+          .logo-wrapper {
+            width: 120px;
+            height: 120px;
           }
-          70% {
-            transform: scale(0.9) translate(-10px, 10px);
-          }
-          100% {
-            transform: scale(1) translate(0, 0);
-            opacity: 1;
+          
+          .loader-logo {
+            width: 75px;
           }
         }
-
-        @keyframes slideWave {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-120px); }
-        }
-      \`}</style>
-      */}
-      
+      `}</style>
     </div>
   );
 };
