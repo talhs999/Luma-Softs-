@@ -402,7 +402,7 @@ export default function Home() {
                 marginBottom: "1.25rem" 
               }}
             >
-              We Are <span style={{ color: "var(--primary)" }}>Luma Softs</span> Web Agency
+              We Are <span style={{ color: "var(--primary)" }}>Luma Softs</span>
             </motion.h1>
             <motion.div 
               variants={fadeUp} 

@@ -1,15 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const Preloader = () => {
   const [visible, setVisible] = useState(true);
   const [fadeOut, setFadeOut] = useState(false);
   const [count, setCount] = useState(0);
+  const videoRef = useRef(null);
 
   useEffect(() => {
     // Check if mobile for faster loading
     const isMobile = window.innerWidth <= 768;
-    const duration = isMobile ? 800 : 1500; // Faster on mobile
+    const duration = isMobile ? 2500 : 4000; // 4 seconds total
+    
+    // Speed up video
+    if (videoRef.current) {
+      videoRef.current.playbackRate = isMobile ? 4.0 : 2.5;
+    }
     
     let start = null;
     let animationFrameId;
@@ -48,14 +54,21 @@ const Preloader = () => {
       }}
     >
       <div className="loader-content">
-        <div className="logo-wrapper">
-          <img src="/logo.png" alt="Luma Softs Logo" className="loader-logo" />
+        <div className="video-wrapper">
+          <video 
+            ref={videoRef}
+            src="/preloader-video.mp4" 
+            autoPlay 
+            muted 
+            playsInline
+            className="loader-video"
+          />
         </div>
-        
-        <div className="counter-wrapper">
-          <span className="counter-text">{count}</span>
-          <span className="counter-percent">%</span>
-        </div>
+      </div>
+      
+      <div className="counter-wrapper">
+        <span className="counter-text">{count}</span>
+        <span className="counter-percent">%</span>
       </div>
 
       <style>{`
@@ -63,7 +76,7 @@ const Preloader = () => {
           position: fixed;
           inset: 0;
           z-index: 9999;
-          background: #050505;
+          background: #000000;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -75,86 +88,65 @@ const Preloader = () => {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 2rem;
+          width: 100%;
+          height: 100%;
         }
 
-        .logo-wrapper {
+        .video-wrapper {
           position: relative;
-          width: 150px;
-          height: 150px;
+          width: 100%;
+          max-width: 600px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
 
-        /* Glowing ring behind logo */
-        .logo-wrapper::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          border-radius: 50%;
-          padding: 3px;
-          background: conic-gradient(from 0deg, transparent, var(--primary), transparent 30%);
-          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-          -webkit-mask-composite: xor;
-          mask-composite: exclude;
-          animation: spin 1s linear infinite;
-        }
-
-        .loader-logo {
-          width: 90px;
+        .loader-video {
+          width: 100%;
           height: auto;
           object-fit: contain;
-          animation: pulseLogo 1.5s ease-in-out infinite alternate;
-          filter: drop-shadow(0 0 15px rgba(194, 255, 5, 0.3));
         }
 
         .counter-wrapper {
+          position: absolute;
+          bottom: 40px;
+          right: 40px;
           display: flex;
-          align-items: flex-end;
-          line-height: 0.8;
-          overflow: hidden;
+          align-items: baseline;
+          line-height: 1; /* Fixed cut off issue */
+          z-index: 2;
         }
 
         .counter-text {
-          font-size: clamp(4rem, 10vw, 8rem);
+          font-size: clamp(3rem, 6vw, 6rem);
           font-weight: 900;
           color: transparent;
           -webkit-text-stroke: 2px var(--primary);
           font-family: system-ui, -apple-system, sans-serif;
           font-variant-numeric: tabular-nums;
+          display: block;
         }
 
         .counter-percent {
-          font-size: clamp(2rem, 5vw, 4rem);
+          font-size: clamp(1.5rem, 3vw, 3rem);
           font-weight: 900;
           color: var(--primary);
-          margin-left: 5px;
-          margin-bottom: 5px;
-        }
-
-        @keyframes spin {
-          to { transform: rotate(360deg); }
-        }
-
-        @keyframes pulseLogo {
-          0% { transform: scale(0.95); opacity: 0.8; }
-          100% { transform: scale(1.05); opacity: 1; }
+          margin-left: 8px;
         }
 
         /* Mobile Adjustments */
         @media (max-width: 768px) {
           .counter-wrapper {
-            display: none; /* Hide counter on mobile as requested */
+            bottom: 20px;
+            right: 20px;
           }
           
-          .logo-wrapper {
-            width: 120px;
-            height: 120px;
+          .counter-text {
+            -webkit-text-stroke: 1px var(--primary);
           }
           
-          .loader-logo {
-            width: 75px;
+          .video-wrapper {
+            max-width: 300px;
           }
         }
       `}</style>
