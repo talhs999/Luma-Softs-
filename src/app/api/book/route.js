@@ -60,6 +60,22 @@ export async function POST(req) {
         `
       );
 
+      // EMAIL 2: Auto-responder for Client (Safe)
+      const clientHtml = generateEmailHTML(
+        "Meeting Request Received",
+        `
+          <p style="margin-top: 0; font-size: 18px; font-weight: 600;">Hi ${name},</p>
+          <p>Thank you for requesting a meeting with Luma Softs. We have successfully received your booking request.</p>
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #eaeaea;">
+            <p style="margin: 0;">Our team will review your requested date and time and send you a confirmation email shortly.</p>
+          </div>
+          <p>We look forward to speaking with you!</p>
+          <br/>
+          <p style="margin: 0;">Best regards,</p>
+          <p style="margin: 5px 0 0 0; font-weight: 600;">The Luma Softs Team</p>
+        `
+      );
+
       try {
         await transporter.sendMail({
           from: `"Luma Softs Booking" <${process.env.SMTP_USER}>`, 
@@ -69,6 +85,13 @@ export async function POST(req) {
           html: adminHtml
         });
 
+        // Send auto-responder to client
+        await transporter.sendMail({
+          from: `"Luma Softs" <${process.env.SMTP_USER}>`, 
+          to: email, 
+          subject: `Your meeting request with Luma Softs is received!`,
+          html: clientHtml
+        });
       } catch (emailError) {
         console.error("Email sending failed, but booking was saved:", emailError.message);
       }

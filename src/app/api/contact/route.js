@@ -54,7 +54,22 @@ export async function POST(req) {
         `
       );
 
-
+      // EMAIL 2: Auto-responder for Client (Safe version - no user input reflected)
+      const clientHtml = generateEmailHTML(
+        "Thank you for contacting Luma Softs!",
+        `
+          <p style="margin-top: 0; font-size: 18px; font-weight: 600;">Hi ${name},</p>
+          <p>Thank you for reaching out to us! We have successfully received your message.</p>
+          <p>Our team is currently reviewing your inquiry and will get back to you as soon as possible, usually within 24 hours.</p>
+          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #eaeaea;">
+            <p style="margin: 0; color: #5f6368; font-size: 14px; font-style: italic;">We have a copy of your message and are assigning it to the right department.</p>
+          </div>
+          <p>We appreciate your interest in Luma Softs and look forward to speaking with you!</p>
+          <br/>
+          <p style="margin: 0;">Best regards,</p>
+          <p style="margin: 5px 0 0 0; font-weight: 600;">The Luma Softs Team</p>
+        `
+      );
 
       try {
         await transporter.sendMail({
@@ -63,6 +78,14 @@ export async function POST(req) {
           to: 'info@lumasofts.com', 
           subject: `New Message: ${subject || 'No Subject'}`,
           html: adminHtml
+        });
+
+        // Send auto-responder to client
+        await transporter.sendMail({
+          from: `"Luma Softs" <${process.env.SMTP_USER}>`, 
+          to: email, 
+          subject: `We have received your message!`,
+          html: clientHtml
         });
       } catch (emailError) {
         console.error("Email sending failed, but contact message was saved:", emailError.message);
