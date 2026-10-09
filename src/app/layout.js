@@ -47,6 +47,7 @@ export const metadata = {
     images: ["https://lumasofts.com/og-image.jpg"]
   },
   icons: {
+    icon: "/logo.png",
     apple: "/logo.png",
   },
   verification: {
