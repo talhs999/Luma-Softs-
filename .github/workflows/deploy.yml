@@ -31,12 +31,12 @@ jobs:
       run: npm run build
 
     - name: 📂 Sync files to cPanel
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /lumasoftswebsite/
+        server-dir: lumasoftswebsite/
         exclude: |
           **/.git*
           **/.git*/**
@@ -48,10 +48,10 @@ jobs:
         date > ftp-restart/restart.txt
         
     - name: 🚀 Upload Restart Trigger
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /lumasoftswebsite/tmp/
+        server-dir: lumasoftswebsite/tmp/
         local-dir: ./ftp-restart/
