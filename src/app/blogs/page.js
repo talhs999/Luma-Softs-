@@ -2,10 +2,11 @@ import React from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { query } from "../../lib/db";
+import { STATIC_BLOGS } from "../../data/blogs";
 
 export const metadata = {
-  title: "Tech Blog — SEO & AI Tips for Pakistan | Luma Softs",
-  description: "Read the latest insights on software development, AI, UI/UX design, and digital marketing from Luma Softs experts in Pakistan.",
+  title: "Tech Blog — SEO, Web Development & Case Studies | Luma Softs",
+  description: "Read the latest insights on software development, SEO backlinks, rapid e-commerce case studies, and digital marketing strategies from Luma Softs experts in Pakistan.",
 };
 
 export const revalidate = 0; // Ensures it fetches fresh blogs on every load
@@ -13,9 +14,16 @@ export const revalidate = 0; // Ensures it fetches fresh blogs on every load
 export default async function BlogsPage() {
   let ALL_BLOGS = [];
   try {
-    ALL_BLOGS = await query('SELECT slug, title, category, date, description AS `desc` FROM blogs ORDER BY created_at DESC');
+    const res = await query('SELECT slug, title, category, date, description AS `desc` FROM blogs ORDER BY created_at DESC');
+    if (res && res.length > 0) {
+      ALL_BLOGS = res;
+    }
   } catch (error) {
-    console.error("Failed to fetch blogs from db:", error);
+    console.warn("Failed to fetch blogs from db, using static fallback:", error.message);
+  }
+
+  if (ALL_BLOGS.length === 0) {
+    ALL_BLOGS = STATIC_BLOGS;
   }
 
   return (

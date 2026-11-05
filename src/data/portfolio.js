@@ -1,6 +1,6 @@
 // Centralized portfolio data — will be fetched from Supabase later
 import React from "react";
-import { Monitor, ShoppingCart, Bot, Smartphone, Palette, BarChart } from "lucide-react";
+import { Monitor, ShoppingCart, Bot, Smartphone, Palette, BarChart, Utensils } from "lucide-react";
 
 export const PORTFOLIO_CATEGORIES = [
   "All",
@@ -15,6 +15,24 @@ export const PORTFOLIO_CATEGORIES = [
 ];
 
 export const ALL_PORTFOLIO = [
+  {
+    slug: "papa-bistro-salzburg",
+    title: "Papa Bistro Salzburg — Rapid E-Commerce in 4 Days",
+    category: "eCommerce",
+    featuredImage: "/papabistro-hero.jpg",
+    images: ["/papabistro-hero.jpg", "/papabistro-menu.jpg", "/papabistro-reviews.jpg"],
+    client: "Papa Bistro (Salzburg, Austria)",
+    duration: "4 Days",
+    technologies: ["WordPress", "WooCommerce", "Elementor Pro", "WhatsApp Ordering", "Google Reviews API"],
+    description: "A mouth-watering, high-converting digital ordering website and menu system for Papa Bistro in Salzburg, Austria. Fully conceptualized, designed, and launched in only 4 days with integrated 1-click WhatsApp checkout, multi-language support (German & English), and automated Google Reviews showcasing their 4.7-star rating.",
+    challenge: "The restaurant needed a complete digital overhaul ahead of the tourist season in Salzburg. The client required instant online food ordering, mobile-responsive digital menus, and verified Google reviews to build customer trust—all with an ultra-tight turnaround time of under one week.",
+    solution: "Luma Softs rapidly architected a robust WordPress and WooCommerce e-commerce solution. We implemented custom category filtering for Halal specialties, direct WhatsApp ordering triggers, multi-currency pricing, and streamlined German-language navigation, achieving deployment within just 4 working days.",
+    results: "Launched in exactly 4 days. Generated over 150+ online orders within week one, improved table inquiries by 65%, and established a 4.7-star trust badge with 159+ Google verified reviews directly on the storefront.",
+    testimonial: "Luma Softs built our entire restaurant website in only 4 days! The ordering flow is so smooth, our guests love the digital menu, and we saw instant orders from day one.",
+    liveUrl: "https://papabistro.com",
+    icon: <Utensils />,
+    show_on_home: true,
+  },
   {
     slug: "corporate-website-redesign",
     title: "Corporate Website Redesign",

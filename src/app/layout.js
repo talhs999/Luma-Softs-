@@ -23,9 +23,9 @@ export const metadata = {
   alternates: {
     canonical: "/",
   },
-  title: "Top Web Development Company in Karachi | Luma Softs",
-  description: "Top-rated web development company in Karachi. Luma Softs builds custom websites, WordPress stores, UI/UX & software to scale your business.",
-  keywords: "Web Development Karachi, Software Company Karachi, Website Design Pakistan, WordPress Developers Karachi, UI/UX Design Studio, Luma Softs",
+  title: "Top Web Development & SEO Agency in Karachi | Luma Softs",
+  description: "Luma Softs is a leading web development and SEO backlinks agency in Karachi (Malir, DHA, Clifton). We build rapid WordPress stores, custom Next.js platforms, UI/UX, and AI software to scale your business.",
+  keywords: "Web Development Karachi, SEO Agency Karachi, Backlinks Pakistan, WordPress Developers Karachi, Fastest Website Development Malir, E-Commerce Solutions, UI/UX Design Studio, Luma Softs",
   openGraph: {
     title: "Top Web Development Company in Karachi | Luma Softs",
     description: "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",

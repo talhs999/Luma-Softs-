@@ -1,21 +1,32 @@
 import React from "react";
 import Link from "next/link";
 import { query } from "../../../lib/db";
+import { STATIC_BLOGS } from "../../../data/blogs";
 import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";// Revalidate 0 ensures we always fetch the latest from the database
+import remarkGfm from "remark-gfm";
+
+// Revalidate 0 ensures we always fetch the latest from the database
 export const revalidate = 0;
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   let title = "Blog | Luma Softs";
   let description = "Read our latest blog post.";
+
   try {
     const blogs = await query('SELECT title, description FROM blogs WHERE slug = ? LIMIT 1', [slug]);
     if (blogs && blogs.length > 0) {
       title = `${blogs[0].title} | Luma Softs`;
       description = blogs[0].description;
+      return { title, description };
     }
   } catch (err) {}
+
+  const staticBlog = STATIC_BLOGS.find(b => b.slug === slug);
+  if (staticBlog) {
+    title = `${staticBlog.title} | Luma Softs`;
+    description = staticBlog.description;
+  }
   
   return { title, description };
 }
@@ -30,7 +41,11 @@ export default async function BlogDetailPage({ params }) {
       blog = blogs[0];
     }
   } catch (error) {
-    console.error("Failed to fetch blog detail:", error);
+    console.warn("Failed to fetch blog detail from db, falling back to static:", error.message);
+  }
+
+  if (!blog) {
+    blog = STATIC_BLOGS.find(b => b.slug === slug);
   }
 
   if (!blog) {
