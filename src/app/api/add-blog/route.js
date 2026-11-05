@@ -36,7 +36,7 @@ export async function GET() {
       const existing = await query('SELECT id FROM portfolio WHERE slug = ?', [papa.slug]);
       if (existing.length > 0) {
         await query(
-          'UPDATE portfolio SET title=?, category=?, featured_image=?, client=?, duration=?, technologies=?, description=?, challenge=?, solution=?, results=?, testimonial=?, live_url=? WHERE slug=?',
+          'UPDATE portfolio SET title=?, category=?, featured_image=?, client=?, duration=?, technologies=?, description=?, challenge=?, solution=?, results=?, testimonial=?, live_url=?, show_on_home=1 WHERE slug=?',
           [
             papa.title,
             papa.category,
@@ -56,7 +56,7 @@ export async function GET() {
         portfolioResults.push({ slug: papa.slug, status: 'updated' });
       } else {
         await query(
-          'INSERT INTO portfolio (slug, title, category, featured_image, client, duration, technologies, description, challenge, solution, results, testimonial, live_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          'INSERT INTO portfolio (slug, title, category, featured_image, client, duration, technologies, description, challenge, solution, results, testimonial, live_url, show_on_home) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)',
           [
             papa.slug,
             papa.title,

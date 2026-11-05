@@ -57,7 +57,7 @@ We ran exhaustive performance and responsive tests:
 - **100% On-Time Delivery:** Handed over in exactly 4 working days.
 - **Immediate Revenue:** Over 150+ online orders processed within the first 7 days of launch.
 - **65% Increase in Table Inquiries:** Through direct WhatsApp and phone reservation links.
-- **Top-Tier Trust:** High conversion backed by verified 4.7★ Google reviews.
+- **Top-Tier Trust:** High conversion backed by verified 4.7-Star Google reviews.
 
 ---
 
