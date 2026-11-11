@@ -169,7 +169,7 @@ INSERT INTO services (slug, title, icon, image, short_desc, long_desc, features,
 
 
 -- ================================================================
--- 7 PORTFOLIO PROJECTS (With Papa Bistro Salzburg Rapid 4-Day Launch)
+-- 12 PORTFOLIO PROJECTS (With Papa Bistro, Raanai Beauty, Locarso, Silver Bird, MAK Innovation & Roofers Construction)
 -- ================================================================
 DELETE FROM portfolio;
 
@@ -184,6 +184,56 @@ INSERT INTO portfolio (slug, title, category, featured_image, client, duration, 
 'Launched in exactly 4 days. Generated over 150+ online orders within week one, improved table inquiries by 65%, and established a 4.7-star trust badge with 159+ Google verified reviews directly on the storefront.',
 'Luma Softs built our entire restaurant website in only 4 days! The ordering flow is so smooth, our guests love the digital menu, and we saw instant orders from day one.',
 'https://papabistro.com'),
+
+('raanai-beauty', 'Raanai Beauty — Luxury Cosmetics & Fragrances Shopify Store', 'eCommerce',
+'/raanaibeauty.jpg', 'Raanai Beauty', '3 Weeks',
+'["Shopify", "Liquid", "Custom Theme", "Payment Gateway", "WhatsApp Integration"]',
+'A luxurious, high-converting Shopify e-commerce store for Raanai Beauty, Pakistan''s premier destination for 100% original world-class fragrances and luxury cosmetics. Featuring advanced category navigation, flash sales, Cash on Delivery (COD), nationwide shipping, and automated promotional banners.',
+'The brand needed a fast, visually stunning, and mobile-optimized online store capable of showcasing luxury perfume and cosmetics brands like Dior, Guerlain, Versace, and Rimmel London with trust badges and high-converting checkout.',
+'Engineered a bespoke Shopify theme with dynamic multi-tiered product filtering, flash sale countdown timers, instant WhatsApp order inquiries, and seamless inventory management.',
+'Achieved 300% growth in online perfume orders within the first month, reduced checkout drop-offs by 40%, and secured a 98% customer satisfaction rate.',
+'Luma Softs created a breathtaking store for Raanai Beauty. Our luxury brand image is elevated, and our daily sales have surpassed all expectations!',
+'https://raanaibeauty.com'),
+
+('locarso-uk', 'Locarso — Handcrafted Luxury Leather Shoes UK (WordPress / WooCommerce)', 'eCommerce',
+'/locarso.jpg', 'Locarso (United Kingdom)', '4 Weeks',
+'["WordPress", "WooCommerce", "Elementor Pro", "Stripe & PayPal", "Multi-Currency Switcher"]',
+'A premium UK-based online boutique specializing in bespoke, handcrafted genuine leather shoes. Built on WordPress and WooCommerce with dual currency support (GBP / USD), free UK delivery calculations, 30-day hassle-free returns, and elegant editorial photography.',
+'Locarso required a sophisticated international digital storefront that highlighted the bespoke craftsmanship of their handcrafted shoes while offering smooth UK payment integrations (Stripe, PayPal, Klarna).',
+'Architected a bespoke WooCommerce architecture with custom product swatches, size conversion guides for UK/US/EU markets, real-time stock tracking, and ultra-fast caching.',
+'Successfully entered the UK fashion market with over 250+ luxury shoe orders in the first 6 weeks and an average order value (AOV) increase of 35%.',
+'The website truly reflects the elegance of our handcrafted shoes. The checkout is buttery smooth for our UK and global clients!',
+'https://locarso.com'),
+
+('silver-bird-cosmetics', 'Silver Bird — Cosmetics & Distribution Network (WordPress)', 'eCommerce',
+'/silverbird.jpg', 'Silver Bird Cosmetics', '3 Weeks',
+'["WordPress", "WooCommerce", "Elementor Pro", "WhatsApp Ordering", "B2B / B2C Catalog"]',
+'Official digital storefront and distribution network portal for Silver Bird, housing 3 proprietary beauty brands (Lovely Angel, AngelTone, Dalisay) with over 20+ years of beauty industry heritage. Features direct retail shopping, bank transfer and Cash on Delivery, and direct wholesale WhatsApp channels.',
+'The company required a dual-purpose platform capable of handling direct-to-consumer (D2C) sales while also serving as a trusted catalog for distributors across Pakistan.',
+'Developed a high-speed WordPress WooCommerce store with dual pricing display, dedicated brand pages, one-click WhatsApp order confirmation, and mobile-first design.',
+'Digitized 20+ years of distribution offline operations, onboarded 50+ new wholesale partners, and achieved over 500+ direct consumer product shipments in month one.',
+'Luma Softs transformed our 20-year-old traditional business into a modern digital powerhouse. Both our retail buyers and wholesale distributors love it!',
+'https://silverbird.pk'),
+
+('mak-innovation', 'MAK Innovation — Creative & Digital Agency Platform (WordPress)', 'Web Development',
+'/makinnovation.jpg', 'MAK Innovation', '2 Weeks',
+'["WordPress", "Elementor Pro", "Custom Dark Theme", "Lead Generation CRM", "Motion Graphics"]',
+'A cutting-edge, dark-themed corporate website for MAK Innovation, a premier creative design agency specializing in brand identity, UI/UX, and digital solutions. Built with high-impact micro-animations, interactive quote generator, and integrated WhatsApp chat.',
+'The agency needed an avant-garde web presence that immediately established creative leadership, showcased their portfolio with smooth animations, and captured high-ticket enterprise client leads.',
+'Engineered a dynamic WordPress build featuring bespoke dark aesthetics, custom vector illustration accents, interactive project enquiry forms, and lightning-fast load times.',
+'Increased inbound agency quote requests by 85% in 30 days and reduced bounce rates to under 28% through engaging visual storytelling.',
+'The new site is bold, creative, and futuristic—exactly what MAK Innovation stands for. Our client inquiries doubled within weeks of launch!',
+'https://makinnovation.com'),
+
+('roofers-construction', 'Roofers Construction & Contractors — Industrial Waterproofing (WordPress)', 'Web Development',
+'/roofersconstruction.jpg', 'Roofers Construction & Contractors', '2 Weeks',
+'["WordPress", "Elementor Pro", "Service Architecture", "Brochure Downloads", "WhatsApp Business"]',
+'Corporate industrial website for Roofers Construction, a premier contracting firm in Karachi, Pakistan specializing in premium roof waterproofing, heat proofing, and industrial building restoration. Features downloadable technical brochures, multi-line emergency dispatch contacts, and project galleries.',
+'The client needed a professional corporate platform to establish credibility with commercial building owners, factories, and architectural firms in Karachi requiring specialized waterproofing.',
+'Built a robust, content-rich WordPress corporate website with dedicated service landing pages, instant WhatsApp quote dispatch, and downloadable PDF technical specifications.',
+'Secured major commercial roof waterproofing contracts within 45 days of launch, ranking #1 for waterproofing contractor queries in Karachi.',
+'Luma Softs built a strong, professional corporate identity for Roofers Construction. It gives our corporate clients complete confidence in our services.',
+'https://roofersconstruction.com'),
 
 ('corporate-website-redesign', 'Corporate Website Redesign', 'Web Development',
 '/web-dev.png', 'TechVentures Inc.', '4 Weeks',

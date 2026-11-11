@@ -29,54 +29,56 @@ export async function GET() {
     }
   }
 
-  // 2. Sync Papa Bistro into Portfolio Table
-  const papa = ALL_PORTFOLIO.find(p => p.slug === 'papa-bistro-salzburg');
-  if (papa) {
+  // 2. Sync All Projects from ALL_PORTFOLIO into Portfolio Table
+  for (const item of ALL_PORTFOLIO) {
     try {
-      const existing = await query('SELECT id FROM portfolio WHERE slug = ?', [papa.slug]);
+      const existing = await query('SELECT id FROM portfolio WHERE slug = ?', [item.slug]);
+      const showHomeVal = item.show_on_home ? 1 : 0;
       if (existing.length > 0) {
         await query(
-          'UPDATE portfolio SET title=?, category=?, featured_image=?, client=?, duration=?, technologies=?, description=?, challenge=?, solution=?, results=?, testimonial=?, live_url=?, show_on_home=1 WHERE slug=?',
+          'UPDATE portfolio SET title=?, category=?, featured_image=?, client=?, duration=?, technologies=?, description=?, challenge=?, solution=?, results=?, testimonial=?, live_url=?, show_on_home=? WHERE slug=?',
           [
-            papa.title,
-            papa.category,
-            papa.featuredImage,
-            papa.client,
-            papa.duration,
-            JSON.stringify(papa.technologies),
-            papa.description,
-            papa.challenge,
-            papa.solution,
-            papa.results,
-            papa.testimonial,
-            papa.liveUrl,
-            papa.slug
+            item.title,
+            item.category,
+            item.featuredImage,
+            item.client,
+            item.duration,
+            JSON.stringify(item.technologies),
+            item.description,
+            item.challenge,
+            item.solution,
+            item.results,
+            item.testimonial,
+            item.liveUrl,
+            showHomeVal,
+            item.slug
           ]
         );
-        portfolioResults.push({ slug: papa.slug, status: 'updated' });
+        portfolioResults.push({ slug: item.slug, status: 'updated' });
       } else {
         await query(
-          'INSERT INTO portfolio (slug, title, category, featured_image, client, duration, technologies, description, challenge, solution, results, testimonial, live_url, show_on_home) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)',
+          'INSERT INTO portfolio (slug, title, category, featured_image, client, duration, technologies, description, challenge, solution, results, testimonial, live_url, show_on_home) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
           [
-            papa.slug,
-            papa.title,
-            papa.category,
-            papa.featuredImage,
-            papa.client,
-            papa.duration,
-            JSON.stringify(papa.technologies),
-            papa.description,
-            papa.challenge,
-            papa.solution,
-            papa.results,
-            papa.testimonial,
-            papa.liveUrl
+            item.slug,
+            item.title,
+            item.category,
+            item.featuredImage,
+            item.client,
+            item.duration,
+            JSON.stringify(item.technologies),
+            item.description,
+            item.challenge,
+            item.solution,
+            item.results,
+            item.testimonial,
+            item.liveUrl,
+            showHomeVal
           ]
         );
-        portfolioResults.push({ slug: papa.slug, status: 'inserted' });
+        portfolioResults.push({ slug: item.slug, status: 'inserted' });
       }
     } catch (err) {
-      portfolioResults.push({ slug: papa.slug, error: err.message });
+      portfolioResults.push({ slug: item.slug, error: err.message });
     }
   }
 
