@@ -9,6 +9,8 @@ const NAV_LINKS = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
   { href: "/portfolio", label: "Portfolio" },
+  { href: "/blogs", label: "Blogs" },
+  { href: "/estimator", label: "Cost Estimator" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -78,7 +80,8 @@ const Navbar = () => {
               left: "50%",
               transform: "translateX(-50%)",
               alignItems: "center",
-              gap: "2.5rem",
+              gap: "1.6rem",
+              whiteSpace: "nowrap",
             }}
           >
             {NAV_LINKS.map((link) => (
@@ -163,14 +166,14 @@ const Navbar = () => {
         }}
         className="mobile-only"
       >
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "2rem", transform: mobileOpen ? "translateY(0)" : "translateY(20px)", transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.4rem", transform: mobileOpen ? "translateY(0)" : "translateY(20px)", transition: "transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
               style={{
-                fontSize: "1.5rem",
+                fontSize: "1.3rem",
                 fontWeight: 600,
                 color: pathname === link.href ? "var(--primary)" : "var(--fg)",
               }}

@@ -3,8 +3,16 @@ import { Target, Handshake, Star, Globe2 } from "lucide-react";
 import TeamSection from "../../components/TeamSection";
 
 export const metadata = {
-  title: "About Us | Luma Softs",
-  description: "Learn about Luma Softs: our mission, vision, values, and the team behind our digital solutions.",
+  title: "About Luma Softs — Founders, Vision & Engineering Team in Karachi",
+  description: "Meet the team behind Luma Softs (founded by Talha Khan, Mustufa Ali & Arhum Noman). Delivering high-speed websites, AI solutions, and global SEO growth.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Luma Softs — Powering Ideas Into Innovation",
+    description: "Meet our founders and engineering team building scalable digital products worldwide.",
+    url: "https://lumasofts.com/about",
+  },
 };
 
 const VALUES = [

@@ -44,14 +44,16 @@ export default function FAQPage() {
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          "mainEntity": [{
-            "@type": "Question",
-            "name": "How much does a website cost in Karachi?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Rs. 25,000 to Rs. 500,000+. Luma Softs packages start from Rs. 25,000."
-            }
-          }]
+          "mainEntity": FAQS.flatMap((cat) =>
+            cat.questions.map((item) => ({
+              "@type": "Question",
+              "name": item.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.a,
+              },
+            }))
+          ),
         })}
       </Script>
       <section style={{ padding: "4rem 0 6rem", minHeight: "80vh" }}>

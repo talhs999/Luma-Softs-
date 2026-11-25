@@ -20,31 +20,35 @@ const marcellus = Marcellus({
 
 export const metadata = {
   metadataBase: new URL("https://lumasofts.com"),
-  alternates: {
-    canonical: "/",
+  title: {
+    default: "Top Web Development, AI & SEO Agency in Karachi | Luma Softs",
+    template: "%s",
   },
-  title: "Top Web Development & SEO Agency in Karachi | Luma Softs",
-  description: "Luma Softs is a leading web development and SEO backlinks agency in Karachi (Malir, DHA, Clifton). We build rapid WordPress stores, custom Next.js platforms, UI/UX, and AI software to scale your business.",
-  keywords: "Web Development Karachi, SEO Agency Karachi, Backlinks Pakistan, WordPress Developers Karachi, Fastest Website Development Malir, E-Commerce Solutions, UI/UX Design Studio, Luma Softs",
+  description: "Luma Softs is a top-rated web development, Shopify/WordPress eCommerce, mobile app, AI automation, and AI SEO (GEO & Backlinks) agency in Karachi serving clients worldwide.",
+  keywords: [
+    "Web Development Karachi",
+    "SEO Agency Karachi",
+    "AI SEO GEO Agency Pakistan",
+    "Backlinks Strategy Karachi",
+    "WordPress Developers Karachi",
+    "Shopify Experts Pakistan",
+    "Fastest Website Development Malir Karachi",
+    "Custom Software Company Pakistan",
+    "Mobile App Development Karachi",
+    "Luma Softs",
+  ],
   openGraph: {
-    title: "Top Web Development Company in Karachi | Luma Softs",
-    description: "Professional Web Development, SEO, UI/UX & Software Solutions in Karachi, Pakistan.",
+    title: "Top Web Development, AI & SEO Agency in Karachi | Luma Softs",
+    description: "High-speed Next.js websites, 4-day WordPress & Shopify stores, Mobile Apps, AI Automation & AI SEO (GEO).",
     url: "https://lumasofts.com",
     siteName: "Luma Softs",
     type: "website",
     locale: "en_PK",
-    images: [{
-      url: "https://lumasofts.com/og-image.jpg",
-      width: 1200,
-      height: 630,
-      alt: "Luma Softs — Web Dev Agency Karachi"
-    }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Top Web Development Company in Karachi | Luma Softs",
-    description: "Professional Web Development, SEO, UI/UX & Software Solutions.",
-    images: ["https://lumasofts.com/og-image.jpg"]
+    title: "Top Web Development, AI & SEO Agency in Karachi | Luma Softs",
+    description: "High-speed Next.js websites, WordPress & Shopify stores, AI Automation & AI SEO (GEO).",
   },
   icons: {
     icon: "/icon.png",
@@ -77,22 +81,51 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        {/* Rich LocalBusiness & Service Schema Markup */}
+        {/* Rich Entity Knowledge Graph (Organization + ProfessionalService + WebSite) */}
         <Script id="json-ld-schema" type="application/ld+json" strategy="afterInteractive">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@graph": [
               {
-                "@type": "LocalBusiness",
+                "@type": ["LocalBusiness", "ProfessionalService", "Organization"],
                 "@id": "https://lumasofts.com/#organization",
                 "name": "Luma Softs",
                 "url": "https://lumasofts.com",
                 "logo": "https://lumasofts.com/logo.png",
-                "image": "https://lumasofts.com/og-image.jpg",
-                "description": "Top-rated web development, UI/UX design, custom software and AI automation agency in Karachi, Pakistan.",
+                "image": "https://lumasofts.com/opengraph-image",
+                "description": "Top-rated web development, Shopify & WordPress eCommerce, UI/UX design, custom software, AI automation, and AI SEO (GEO & Backlinks) agency in Karachi, Pakistan serving global brands.",
                 "telephone": "+92-313-666-1921",
-                "email": "admin@lumasofts.com",
+                "email": "info@lumasofts.com",
                 "priceRange": "$$",
+                "sameAs": [
+                  "https://www.facebook.com/61580289124242/",
+                  "https://www.instagram.com/luma_softs/",
+                  "https://www.linkedin.com/in/luma-softs-6a912b384/",
+                  "https://maps.app.goo.gl/V7njffBB5mDPKtnV8"
+                ],
+                "founder": [
+                  { "@type": "Person", "name": "Talha Khan", "jobTitle": "Co-Founder" },
+                  { "@type": "Person", "name": "Mustufa Ali", "jobTitle": "Co-Founder" },
+                  { "@type": "Person", "name": "Arhum Noman", "jobTitle": "Partner" }
+                ],
+                "knowsAbout": [
+                  "Next.js Web Development",
+                  "WordPress & WooCommerce Development",
+                  "Shopify Store Engineering",
+                  "Technical SEO & High-Authority Backlinks",
+                  "Generative Engine Optimization (GEO / AI SEO)",
+                  "Mobile App Development (React Native & Flutter)",
+                  "AI Chatbots & Workflow Automation",
+                  "UI/UX Design & Brand Identity"
+                ],
+                "areaServed": [
+                  { "@type": "City", "name": "Karachi" },
+                  { "@type": "Country", "name": "Pakistan" },
+                  { "@type": "Country", "name": "United Kingdom" },
+                  { "@type": "Country", "name": "Austria" },
+                  { "@type": "Country", "name": "United Arab Emirates" },
+                  { "@type": "Country", "name": "United States" }
+                ],
                 "address": { 
                   "@type": "PostalAddress",
                   "addressLocality": "Karachi", 
@@ -113,8 +146,17 @@ export default function RootLayout({ children }) {
                 "aggregateRating": {
                   "@type": "AggregateRating",
                   "ratingValue": "4.9",
-                  "reviewCount": "28"
+                  "reviewCount": "42",
+                  "bestRating": "5"
                 }
+              },
+              {
+                "@type": "WebSite",
+                "@id": "https://lumasofts.com/#website",
+                "url": "https://lumasofts.com",
+                "name": "Luma Softs",
+                "publisher": { "@id": "https://lumasofts.com/#organization" },
+                "inLanguage": "en"
               }
             ]
           })}

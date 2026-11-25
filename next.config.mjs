@@ -46,6 +46,11 @@ const nextConfig = {
         destination: '/services',
         permanent: true,
       },
+      {
+        source: '/services/seo-digital-marketing',
+        destination: '/services/digital-marketing',
+        permanent: true,
+      },
     ];
   },
   async headers() {
@@ -56,6 +61,14 @@ const nextConfig = {
           {
             key: 'Strict-Transport-Security',
             value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
           },
         ],
       },

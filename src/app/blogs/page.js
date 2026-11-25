@@ -5,8 +5,16 @@ import { query } from "../../lib/db";
 import { STATIC_BLOGS } from "../../data/blogs";
 
 export const metadata = {
-  title: "Tech Blog — SEO, Web Development & Case Studies | Luma Softs",
-  description: "Read the latest insights on software development, SEO backlinks, rapid e-commerce case studies, and digital marketing strategies from Luma Softs experts in Pakistan.",
+  title: "Tech, SEO & AI (GEO) Blog — Guides & Case Studies | Luma Softs",
+  description: "Actionable guides on website pricing in Karachi, high-authority backlinks, AI SEO (GEO for ChatGPT & Perplexity), and 4-day eCommerce case studies by Luma Softs.",
+  alternates: {
+    canonical: "/blogs",
+  },
+  openGraph: {
+    title: "Luma Softs Engineering & SEO Blog",
+    description: "Insights on Next.js, WordPress, Shopify, Backlink Strategy, and AI Search Optimization.",
+    url: "https://lumasofts.com/blogs",
+  },
 };
 
 export const revalidate = 0; // Ensures it fetches fresh blogs on every load

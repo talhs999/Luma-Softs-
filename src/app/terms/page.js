@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Terms and Conditions | Luma Softs",
   description: "Terms and Conditions for Luma Softs digital services and software products.",
+  alternates: { canonical: "/terms" },
 };
 
 export default function TermsPage() {

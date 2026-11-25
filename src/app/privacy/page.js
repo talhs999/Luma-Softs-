@@ -4,6 +4,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Privacy Policy | Luma Softs",
   description: "Privacy Policy for Luma Softs. Learn how we collect, use, and protect your data.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPolicyPage() {

@@ -7,8 +7,16 @@ import PortfolioClient from "./PortfolioClient";
 export const revalidate = 0;
 
 export const metadata = {
-  title: "Our Work & Portfolio | Luma Softs",
-  description: "View our recent web development, app development, and UI/UX design projects in Karachi and worldwide, including rapid 4-day e-commerce and corporate platforms.",
+  title: "Our Work & Case Studies — Shopify, WordPress & Next.js Portfolio | Luma Softs",
+  description: "Explore 150+ websites, rapid 4-day eCommerce stores, UK/Europe luxury brands, and custom software case studies built by Luma Softs.",
+  alternates: {
+    canonical: "/portfolio",
+  },
+  openGraph: {
+    title: "Featured Portfolio & Client Case Studies | Luma Softs",
+    description: "Verified results across eCommerce, SaaS, AI automation, and corporate platforms.",
+    url: "https://lumasofts.com/portfolio",
+  },
 };
 
 export default async function PortfolioPage() {
