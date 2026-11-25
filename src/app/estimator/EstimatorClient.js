@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
-import { Calculator, Zap, ShoppingCart, Globe, Smartphone, Bot, TrendingUp, Check, MessageCircle, Search, ArrowRight, Sparkles } from "lucide-react";
+import { Calculator, Zap, ShoppingCart, Globe, Smartphone, Bot, TrendingUp, Check, MessageCircle, Search, ArrowRight, Sparkles, Code2 } from "lucide-react";
 
 const CURRENCIES = {
   PKR: { symbol: "Rs.", rate: 1, label: "PKR (Rs.)" },
@@ -12,62 +12,72 @@ const CURRENCIES = {
 
 const PROJECT_TYPES = [
   {
-    id: "business-web",
-    title: "Business / Corporate Website",
-    desc: "Fast, responsive multi-page brand site with lead capture & SEO foundation.",
+    id: "wordpress-site",
+    title: "WordPress Business Site (5–6 Pages)",
+    desc: "Clean, fast 5–6 page corporate/service website with contact, WhatsApp & basic SEO.",
     icon: Globe,
-    minPkr: 35000,
-    maxPkr: 75000,
-    daysMin: 5,
-    daysMax: 12,
+    minPkr: 15000,
+    maxPkr: 30000,
+    daysMin: 4,
+    daysMax: 7,
   },
   {
     id: "ecommerce",
     title: "Shopify / WooCommerce Store",
-    desc: "High-converting online store with cart, COD/Card checkout & inventory.",
+    desc: "Complete eCommerce store with product catalog, cart, COD/Card checkout & inventory.",
     icon: ShoppingCart,
-    minPkr: 75000,
-    maxPkr: 165000,
+    minPkr: 25000,
+    maxPkr: 50000,
     daysMin: 4,
+    daysMax: 10,
+  },
+  {
+    id: "custom-website",
+    title: "Custom Coded Website (Next.js / React)",
+    desc: "Ultra-fast custom coded website or custom eCommerce with 99+ speed & animations.",
+    icon: Code2,
+    minPkr: 40000,
+    maxPkr: 75000,
+    daysMin: 7,
     daysMax: 14,
   },
   {
     id: "nextjs-saas",
-    title: "Custom Next.js / SaaS Platform",
-    desc: "Blazing-fast custom full-stack web app, dashboard, CRM or portal.",
+    title: "SaaS Platform / Custom Web App",
+    desc: "Full-stack SaaS platform, admin dashboard, custom CRM/ERP or client portal.",
     icon: Sparkles,
-    minPkr: 150000,
-    maxPkr: 380000,
-    daysMin: 18,
-    daysMax: 35,
+    minPkr: 50000,
+    maxPkr: 120000,
+    daysMin: 14,
+    daysMax: 30,
   },
   {
     id: "mobile-app",
     title: "Mobile App (iOS & Android)",
-    desc: "Cross-platform Flutter / React Native app with API & store publishing.",
+    desc: "Cross-platform Flutter / React Native app with backend API & store publishing.",
     icon: Smartphone,
-    minPkr: 220000,
-    maxPkr: 520000,
-    daysMin: 30,
-    daysMax: 60,
+    minPkr: 60000,
+    maxPkr: 150000,
+    daysMin: 20,
+    daysMax: 40,
   },
   {
     id: "ai-automation",
     title: "AI Chatbot & Workflow Automation",
-    desc: "24/7 custom trained AI support agent, WhatsApp bot & CRM automation.",
+    desc: "24/7 custom trained AI support agent, WhatsApp bot & lead automation.",
     icon: Bot,
-    minPkr: 60000,
-    maxPkr: 150000,
-    daysMin: 7,
-    daysMax: 15,
+    minPkr: 20000,
+    maxPkr: 45000,
+    daysMin: 4,
+    daysMax: 10,
   },
   {
     id: "seo-geo",
     title: "Technical SEO, Backlinks & AI SEO (GEO)",
     desc: "Rank on Google Page 1 + ChatGPT, Perplexity & Gemini AI citations.",
     icon: TrendingUp,
-    minPkr: 40000,
-    maxPkr: 95000,
+    minPkr: 15000,
+    maxPkr: 35000,
     daysMin: 30,
     daysMax: 90,
     isMonthly: true,
@@ -75,12 +85,12 @@ const PROJECT_TYPES = [
 ];
 
 const ADDONS = [
-  { id: "rapid-4day", label: "⚡ 4-Day Express Priority Delivery", minPkr: 25000, maxPkr: 45000 },
-  { id: "whatsapp-order", label: "💬 1-Click WhatsApp Ordering & Lead Sync", minPkr: 12000, maxPkr: 20000 },
-  { id: "multi-currency", label: "🌍 Multi-Currency & Global Payments (Stripe/PayPal)", minPkr: 18000, maxPkr: 30000 },
-  { id: "ai-seo-pack", label: "🚀 Full On-Page SEO + High-DA Backlinks + llms.txt GEO", minPkr: 30000, maxPkr: 55000 },
-  { id: "custom-uiux", label: "🎨 Bespoke Figma UI/UX Prototype & Brand Kit", minPkr: 25000, maxPkr: 50000 },
-  { id: "ai-assistant", label: "🤖 Custom AI Chatbot Trained on Your Website", minPkr: 35000, maxPkr: 65000 },
+  { id: "rapid-4day", label: "⚡ 4-Day Express Priority Delivery", minPkr: 5000, maxPkr: 10000 },
+  { id: "whatsapp-order", label: "💬 1-Click WhatsApp Ordering & Lead Sync", minPkr: 3000, maxPkr: 6000 },
+  { id: "multi-currency", label: "🌍 Multi-Currency & Payment Gateways (Stripe/PayPal/COD)", minPkr: 5000, maxPkr: 10000 },
+  { id: "ai-seo-pack", label: "🚀 On-Page SEO + High-DA Backlinks + llms.txt GEO", minPkr: 8000, maxPkr: 15000 },
+  { id: "custom-uiux", label: "🎨 Custom Figma UI/UX Design & Brand Kit", minPkr: 7000, maxPkr: 15000 },
+  { id: "ai-assistant", label: "🤖 Custom AI Chatbot Trained on Your Website", minPkr: 10000, maxPkr: 20000 },
 ];
 
 function formatMoney(pkrAmount, currencyKey) {
@@ -88,13 +98,13 @@ function formatMoney(pkrAmount, currencyKey) {
   if (currencyKey === "PKR") {
     return `${symbol} ${Math.round(pkrAmount / 1000) * 1000}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
-  const converted = Math.max(50, Math.round((pkrAmount * rate) / 10) * 10);
+  const converted = Math.max(10, Math.round((pkrAmount * rate) / 5) * 5);
   return `${symbol}${converted.toLocaleString()}`;
 }
 
 export default function EstimatorClient() {
-  const [selectedType, setSelectedType] = useState("ecommerce");
-  const [selectedAddons, setSelectedAddons] = useState(["whatsapp-order", "ai-seo-pack"]);
+  const [selectedType, setSelectedType] = useState("wordpress-site");
+  const [selectedAddons, setSelectedAddons] = useState([]);
   const [currency, setCurrency] = useState("PKR");
   const [auditUrl, setAuditUrl] = useState("");
   const [copiedLink, setCopiedLink] = useState(false);

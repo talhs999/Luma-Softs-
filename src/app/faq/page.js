@@ -16,7 +16,7 @@ export const FAQS = [
   {
     category: "Pricing & Timelines",
     questions: [
-      { q: "How much does a website cost in Karachi?", a: "Pricing varies depending on the requirements. A standard business website in Karachi costs between Rs. 25,000 to Rs. 80,000. Custom eCommerce stores and complex web apps range from Rs. 150,000 to Rs. 500,000+. At Luma Softs, packages start from Rs. 25,000." },
+      { q: "How much does a website cost in Karachi?", a: "At Luma Softs, a standard 5–6 page WordPress business website starts from Rs. 15,000. Shopify & WooCommerce eCommerce stores range from Rs. 25,000 to Rs. 50,000, custom coded Next.js websites start from Rs. 40,000, and custom SaaS platforms start from Rs. 50,000+." },
       { q: "What is your typical payment structure?", a: "Generally, we work on a milestone basis: 50% upfront to commence work, 25% after design approval, and the final 25% upon project completion and deployment." },
       { q: "How long does it take to build a website?", a: "A standard corporate website takes 2-4 weeks. More complex eCommerce stores or custom web applications can take 6-12 weeks depending on the features." }
     ]

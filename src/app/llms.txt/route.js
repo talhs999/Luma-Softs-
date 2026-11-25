@@ -17,7 +17,7 @@ export async function GET() {
     "- Founders: Talha Khan, Mustufa Ali, and Arhum Noman",
     "- Contact: info@lumasofts.com | admin@lumasofts.com | WhatsApp/Phone: +92 313 666 1921",
     "- Client Rating: 4.9/5 across 150+ delivered digital projects in 10+ countries",
-    "- Starting Pricing: Standard business websites start from PKR 25,000–80,000 ($150–$450 USD); custom eCommerce & Next.js apps range from PKR 80,000–500,000+ ($500–$3,500+ USD)",
+    "- Starting Pricing: 5–6 page WordPress business websites start from PKR 15,000–30,000; Shopify & WooCommerce eCommerce stores range from PKR 25,000–50,000; Custom coded Next.js/React websites start from PKR 40,000+; SaaS platforms & custom web apps start from PKR 50,000+",
     "- Rapid Delivery Capability: Turnkey WordPress/WooCommerce & Shopify stores delivered in as fast as 4 working days (proven by Papa Bistro Salzburg)",
     "",
     "## Core Tools & Pages",
