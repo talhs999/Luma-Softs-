@@ -29,32 +29,13 @@ export async function GET() {
     }
   }
 
-  // 2. Sync All Projects from ALL_PORTFOLIO into Portfolio Table
+  // 2. Safely insert missing portfolio items ONLY (never overwrite existing live DB portfolio rows!)
   for (const item of ALL_PORTFOLIO) {
     try {
       const existing = await query('SELECT id FROM portfolio WHERE slug = ?', [item.slug]);
       const showHomeVal = item.show_on_home ? 1 : 0;
       if (existing.length > 0) {
-        await query(
-          'UPDATE portfolio SET title=?, category=?, featured_image=?, client=?, duration=?, technologies=?, description=?, challenge=?, solution=?, results=?, testimonial=?, live_url=?, show_on_home=? WHERE slug=?',
-          [
-            item.title,
-            item.category,
-            item.featuredImage,
-            item.client,
-            item.duration,
-            JSON.stringify(item.technologies),
-            item.description,
-            item.challenge,
-            item.solution,
-            item.results,
-            item.testimonial,
-            item.liveUrl,
-            showHomeVal,
-            item.slug
-          ]
-        );
-        portfolioResults.push({ slug: item.slug, status: 'updated' });
+        portfolioResults.push({ slug: item.slug, status: 'skipped_existing' });
       } else {
         await query(
           'INSERT INTO portfolio (slug, title, category, featured_image, client, duration, technologies, description, challenge, solution, results, testimonial, live_url, show_on_home) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
